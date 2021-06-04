@@ -1,0 +1,33 @@
+/* Author JM Juif */
+@media screen {
+    :root {
+        --ori-purple: #6f42c1;
+        --ori-indigo: #6610f2;
+        --ori-danger: #f74f78;
+        --ori-primary: #766df4;
+        --ori-secondary: #f7f7fc;
+        --ori-pink: #d63384;
+        --ori-blue: #0d6efd;
+        --ori-green: #198754;
+        --ori-red: #dc3545;
+        --ori-cyan: #0dcaf0;
+        --ori-teal: #20c997;
+        --ori-orange: #fd7e14;
+        --ori-info: #6a9bf4;
+        --ori-success: #16c995;
+        --ori-yellow: #ffc107;
+        --ori-gray: #737491;
+        --ori-gray-dark: #4a4b65;
+        --ori-warning: #ffb15c; 
+        --ori-dark: #37384e;
+        --ori-light: #fff;
+    }
+}
+
+.ori-bg-dark {
+    background-color: var(--ori-dark);
+}
+
+.ori-pink {
+    color: var(--ori-pink);
+}
