@@ -101,12 +101,16 @@
                 <i class="bi bi-star"></i>
               </div>
               <div class="d-flex align-items-center">
-                <a href="#" class="btn-wishlist">
-                  <i class="bi bi-heart" title="Ajouter à votre liste de souhait"></i>
+                <a  href="#"
+                    class="btn-wishlist"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="Ajouter à votre liste de souhaits">
+                  <i class="bi bi-heart"></i>
                 </a>
                 <span class="btn-divider"></span>
-                <a href="#" class="btn-addtocart">
-                  <i class="bi bi-cart-plus" title="Ajouter au panier"></i>
+                <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <i class="bi bi-cart-plus"></i>
                 </a>
               </div>
             </div>
@@ -138,12 +142,12 @@
                 <i class="bi bi-star"></i>
               </div>
               <div class="d-flex align-items-center">
-                <a href="#" class="btn-wishlist">
-                  <i class="bi bi-heart" title="Ajouter à votre liste de souhait"></i>
+                <a href="#" class="btn-wishlist" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter à votre liste de souhaits">
+                  <i class="bi bi-heart"></i>
                 </a>
                 <span class="btn-divider"></span>
-                <a href="#" class="btn-addtocart">
-                  <i class="bi bi-cart-plus" title="Ajouter au panier"></i>
+                <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <i class="bi bi-cart-plus"></i>
                 </a>
               </div>
             </div>
@@ -175,12 +179,12 @@
                 <i class="bi bi-star"></i>
               </div>
               <div class="d-flex align-items-center">
-                <a href="#" class="btn-wishlist">
-                  <i class="bi bi-heart" title="Ajouter à votre liste de souhait"></i>
+                <a href="#" class="btn-wishlist" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter à votre liste de souhaits">
+                  <i class="bi bi-heart"></i>
                 </a>
                 <span class="btn-divider"></span>
-                <a href="#" class="btn-addtocart">
-                  <i class="bi bi-cart-plus" title="Ajouter au panier"></i>
+                <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <i class="bi bi-cart-plus"></i>
                 </a>
               </div>
             </div>
@@ -212,12 +216,12 @@
                 <i class="bi bi-star-fill sr-start active"></i>
               </div>
               <div class="d-flex align-items-center">
-                <a href="#" class="btn-wishlist">
-                  <i class="bi bi-heart" title="Ajouter à votre liste de souhait"></i>
+                <a href="#" class="btn-wishlist" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter à votre liste de souhaits">
+                  <i class="bi bi-heart"></i>
                 </a>
                 <span class="btn-divider"></span>
-                <a href="#" class="btn-addtocart">
-                  <i class="bi bi-cart-plus" title="Ajouter au panier"></i>
+                <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <i class="bi bi-cart-plus"></i>
                 </a>
               </div>
             </div>
@@ -251,12 +255,12 @@
                 <i class="bi bi-star"></i>
               </div>
               <div class="d-flex align-items-center">
-                <a href="#" class="btn-wishlist">
-                  <i class="bi bi-heart" title="Ajouter à votre liste de souhait"></i>
+                <a href="#" class="btn-wishlist" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter à votre liste de souhaits">
+                  <i class="bi bi-heart"></i>
                 </a>
                 <span class="btn-divider"></span>
-                <a href="#" class="btn-addtocart">
-                  <i class="bi bi-cart-plus" title="Ajouter au panier"></i>
+                <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <i class="bi bi-cart-plus"></i>
                 </a>
               </div>
             </div>
@@ -358,6 +362,13 @@
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
+  <!-- Boostrap Tooltips Initialization -->
+  <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 
