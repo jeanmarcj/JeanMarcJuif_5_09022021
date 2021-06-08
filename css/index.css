@@ -126,6 +126,11 @@
     color: var(--ori-primary) !important;
 }
 
+.bi.bi-cart:hover {
+    color: var(--ori-primary);
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
 .card {
     border-radius: calc(1rem - 1px);
 }
