@@ -1,17 +1,30 @@
 {
-  "name": " ",
+  "name": "orinoco",
   "version": "0.0.1",
-  "description": "",
-  "keywords": "",
-  "license": "",
-  "author": "",
+  "description": "E-commerce site from scratch, html, css, JavaScript",
+  "keywords": [],
+  "license": "ISC",
+  "author": "JM Juif",
   "scripts": {
     "build": "parcel build index.html",
     "dev": "parcel index.html --open",
     "start": "npm run build && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch SASS/style.scss:css/main.css"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeanmarcj/JeanMarcJuif_5_09022021.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeanmarcj/JeanMarcJuif_5_09022021/issues"
+  },
+  "homepage": "https://github.com/jeanmarcj/JeanMarcJuif_5_09022021#readme"
 }

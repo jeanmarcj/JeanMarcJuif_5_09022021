@@ -1,0 +1,11 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./base/setup";
+// @import ".component/";
+// @import "./layouts/header";
+// @import "./layouts/footer";
+@import "./pages/index.scss";
+@import "./pages/shop-single";
+
+// To run SASS
+// npm run sass (execute SASS with --watch)
