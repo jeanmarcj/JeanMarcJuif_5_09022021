@@ -1,9 +1,10 @@
 @import "./utils/variables";
 @import "./utils/mixins";
 @import "./base/setup";
-// @import ".component/";
+@import "./components/card";
+@import "./layouts/navbar";
 // @import "./layouts/header";
-// @import "./layouts/footer";
+@import "./layouts/footer";
 @import "./pages/index.scss";
 @import "./pages/shop-single";
 
