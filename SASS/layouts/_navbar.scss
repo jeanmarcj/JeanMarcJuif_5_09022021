@@ -1,0 +1,53 @@
+// cart-icon in the main navbar.
+.nav-link {
+    .bi.bi-cart:hover,
+    .bi.bi-cart:focus,
+    .bi-bi-cart:active {
+        color: var(--ori-primary);
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    }
+}
+
+.navbar-tool {
+    .border-start {
+        height: 30px;
+        margin-top: 1rem;
+        color: rgba(255,255,255,.2);
+        
+    }
+    .nav-bar-tool-icon-box {
+        position: relative;
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.375rem;
+        text-align: center;
+
+        .navbar-tool-badge {
+            position: absolute;
+            top: .125rem;
+            right: -.5625rem;
+            width: 1.125rem;
+            height: 1.125rem;
+            font-size: .75rem;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.125rem;
+            border-radius: 50%;
+            background-color: var(--ori-primary);
+            color: #fff;
+        }
+    }
+}
+
+.meta-link {
+    transition: color 0.2s ease-in-out;
+    color: #797a95;
+    vertical-align: middle;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--ori-dark);
+    }
+}
