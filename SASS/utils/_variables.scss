@@ -89,6 +89,32 @@
         padding-bottom: 1rem;
     }
 
+    // BreakPoint medium (tablet)
+    .mb-md-6 {
+        @include medium {
+            margin-bottom: 5rem;
+        }
+    }
+
+    .py-md-5 {
+        @include medium {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+    }
+
+    .pb-md-3 {
+        @include medium {
+            padding-bottom: 1rem;
+        }
+    }
+
+    .pt-md-6 {
+        @include medium {
+            padding-top: 5rem;
+        }
+    }
+
     /* Letter spacing */
     .letter-space-2 {
         letter-spacing: -2px;

@@ -7,10 +7,10 @@
     }
 }
   
-  // Medium > md >= 768px
-  @mixin medium {
+// Medium > md >= 768px
+@mixin medium {
     @media only screen and (min-width: 768px) {
-      @content;
+        @content;
     }
 }
 
