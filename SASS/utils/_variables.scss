@@ -114,6 +114,7 @@
     }
     
     // buttons
+
     .btn-primary {
         color: #fff;
         background-color: var(--ori-primary);
@@ -127,6 +128,12 @@
     .btn-primary.show {
         background-color: #5549f1;
         border-color: #5549f1;
+    }
+
+    .btn-sm {
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        border-radius: .2rem;
     }
 
 
