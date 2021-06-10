@@ -61,8 +61,14 @@
     .fs-xs {
         font-size: .75rem;
     }
+    .fs-sm {
+        font-size: .875rem;
+    }
     .fs-md {
         font-size: .9375rem;
+    }
+    .fs-xl {
+        font-size: 1.25rem;
     }
 
     /* Fonts weight */
@@ -128,17 +134,13 @@
         opacity: .5;
     }
 
-    // Flex
-    .align-items-center {
-        align-items: center !important;
-    }
-
     /* Layout */
     .page-wrapper {
         flex: 1 0 auto;
     }
     
     // buttons
+
     .btn-primary {
         color: #fff;
         background-color: var(--ori-primary);
@@ -152,6 +154,12 @@
     .btn-primary.show {
         background-color: #5549f1;
         border-color: #5549f1;
+    }
+
+    .btn-sm {
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        border-radius: .2rem;
     }
 
 
