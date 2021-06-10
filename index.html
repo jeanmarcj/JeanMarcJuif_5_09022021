@@ -36,6 +36,8 @@
 
   <!-- Add your site or application content here -->
 
+  <main>
+
     <!-- Navigation block collapsing -->
     <nav class="navbar navbar-expand-md navbar-dark ori-bg-dark">
       <div class="container-fluid">
@@ -68,7 +70,7 @@
       </div>
     </nav>
     <!-- End navigation block collapsing -->
-    
+
     <!-- Shopping cart off-canvas on right side of the viewport  -->
     <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
       <!-- Offcanvas header -->
@@ -134,13 +136,14 @@
       </div>
     </div>
 
-    <!-- Products list title -->
+    <!-- Products main title -->
     <div class="container">
       <h1 class="ori-pink mt-5 mb-5 letter-space-2">Appareils photo professionnels</h1>
     </div>
 
     <!-- Products list block -->
     <div class="container mt-5">
+      <!-- Shop Grid -->
       <div class="row">
         <!-- item -->
         <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
@@ -336,94 +339,96 @@
           </div>
         </div>
       </div>
-       <!-- End products list block -->
+        <!-- End products list block -->
       
     </div>
 
-    <!-- Footer bloc -->
-    <footer class="footer ori-bg-dark pt-5 pt-md-6">
-      <div class="container pt-3 pb-0 pt-md-0 pb-md-3">
-        <div class="row mb-4">
-          <div class="col-md-4">
-            <div class="widget widget-light pb-2 mb-4">
-              <h4 class="widget-title">Nos produits</h4>
-              <ul>
-                <li><a href="#" class="widget-link">Teddys</a></li>
-                <li><a href="#" class="widget-link">Furnitures</a></li>
-                <li><a href="#" class="widget-link">Cameras</a></li>
-              </ul>
+  </main>
+
+  <!-- Footer block -->
+  <footer class="footer ori-bg-dark pt-5 pt-md-6">
+    <div class="container pt-3 pb-0 pt-md-0 pb-md-3">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="widget widget-light pb-2 mb-4">
+            <h4 class="widget-title">Nos produits</h4>
+            <ul>
+              <li><a href="#" class="widget-link">Teddys</a></li>
+              <li><a href="#" class="widget-link">Furnitures</a></li>
+              <li><a href="#" class="widget-link">Cameras</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="widget widget-light pb-2 mb-4">
+            <h4 class="widget-title">Espace client</h4>
+            <ul>
+              <li><a href="#" class="widget-link">Votre compte</a></li>
+              <li><a href="#" class="widget-link">Conditions de vente</a></li>
+              <li><a href="#" class="widget-link">Echanges & Remboursements</a></li>
+              <li><a href="#" class="widget-link">Suivi de commandes</a></li>
+              <li><a href="#" class="widget-link">Information livraison</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="widget widget-light pb-2 mb-4">
+            <h4 class="widget-title">News Letter</h4>
+            <p>Recevez notre News Letter pour rester informé de la sortie de nos nouveaux produits.</p>
+          </div>
+          <div class="widget widget-light pb-2 mb-4">
+            <h4 class="widget-title">Téléchargez notre application</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ori-bg-darker pt-2">
+      <div class="container py-sm-3">
+        <div class="row pb-4 mb-2 pt-5 py-md-5">
+          <!-- Service #1 -->
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-truck text-primary"></i>
+              <div class="ps-3">
+                <h6 class="fs-base text-light mb-1">Livraison gratuite</h6>
+                <p class="mb-0 fs-xs text-light opacity-50">Livraison gratuite à partir de 200€</p>
+              </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="widget widget-light pb-2 mb-4">
-              <h4 class="widget-title">Espace client</h4>
-              <ul>
-                <li><a href="#" class="widget-link">Votre compte</a></li>
-                <li><a href="#" class="widget-link">Conditions de vente</a></li>
-                <li><a href="#" class="widget-link">Echanges & Remboursements</a></li>
-                <li><a href="#" class="widget-link">Suivi de commandes</a></li>
-                <li><a href="#" class="widget-link">Information livraison</a></li>
-              </ul>
+          <!-- Service #2 -->
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-arrow-repeat text-primary"></i>
+              <div class="ps-3">
+                <h6 class="fs-base text-light mb-1">Remboursement Garanti</h6>
+                <p class="mb-0 fs-xs text-light opacity-50">Dans les 30 jours suivants votre achat</p>
+              </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="widget widget-light pb-2 mb-4">
-              <h4 class="widget-title">News Letter</h4>
-              <p>Recevez notre News Letter pour rester informé de la sortie de nos nouveaux produits.</p>
+          <!-- Service #3 -->
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-question-circle text-primary"></i>
+              <div class="ps-3">
+                <h6 class="fs-base text-light mb-1">Support Clients</h6>
+                <p class="mb-0 fs-xs text-light opacity-50">Du lundi au samedi</p>
+              </div>
             </div>
-            <div class="widget widget-light pb-2 mb-4">
-              <h4 class="widget-title">Téléchargez notre application</h4>
+          </div>
+          <!-- Service #4 -->
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-credit-card-2-front text-primary"></i>
+              <div class="ps-3">
+                <h6 class="fs-base text-light mb-1">Paiement sécurisé</h6>
+                <p class="mb-0 fs-xs text-light opacity-50">Sécurisation SSL des règlements</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="ori-bg-darker pt-2">
-        <div class="container py-sm-3">
-          <div class="row pb-4 mb-2 pt-5 py-md-5">
-            <!-- Service #1 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-truck text-primary"></i>
-                <div class="ps-3">
-                  <h6 class="fs-base text-light mb-1">Livraison gratuite</h6>
-                  <p class="mb-0 fs-xs text-light opacity-50">Livraison gratuite à partir de 200€</p>
-                </div>
-              </div>
-            </div>
-            <!-- Service #2 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-arrow-repeat text-primary"></i>
-                <div class="ps-3">
-                  <h6 class="fs-base text-light mb-1">Remboursement Garanti</h6>
-                  <p class="mb-0 fs-xs text-light opacity-50">Dans les 30 jours suivants votre achat</p>
-                </div>
-              </div>
-            </div>
-            <!-- Service #3 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-question-circle text-primary"></i>
-                <div class="ps-3">
-                  <h6 class="fs-base text-light mb-1">Support Clients</h6>
-                  <p class="mb-0 fs-xs text-light opacity-50">Du lundi au samedi</p>
-                </div>
-              </div>
-            </div>
-            <!-- Service #4 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-              <div class="d-flex align-items-center">
-                <i class="bi bi-credit-card-2-front text-primary"></i>
-                <div class="ps-3">
-                  <h6 class="fs-base text-light mb-1">Paiement sécurisé</h6>
-                  <p class="mb-0 fs-xs text-light opacity-50">Sécurisation SSL des règlements</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>  
+    </div>
+  </footer>  
   
   <!-- JavaScript Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
