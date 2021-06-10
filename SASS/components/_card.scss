@@ -18,21 +18,6 @@
         border: 0;
         background: rgba(0,0,0,0);
 
-        .star-rating {
-            display: inline-block;
-            white-space: nowrap;
-            line-height: 1;
-            vertical-align: middle;
-
-            .bi-star-fill,
-            .bi-star {
-                font-size: .8125rem;
-            }
-            .bi-star-fill {
-                color: var(--ori-warning);
-            }
-        }
-
         .btn-wishlist {
             font-size: 1.25rem;
             color: #9e9fb4;

@@ -1,0 +1,18 @@
+/* Spcifics components for this website */
+.star-rating {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    vertical-align: middle;
+
+    .bi-star-fill,
+    .bi-star {
+        font-size: .8125rem;
+    }
+    .bi-star-fill {
+        color: var(--ori-warning);
+    }
+}
+.star-rating-lg {
+    font-size: .9375rem;
+}
