@@ -34,196 +34,75 @@
 
 <body>
 
-  <!-- Add your site or application content here -->
-    
-    <main class="page-wrapper">
-
-      <!-- Shopping cart off-canvas on right side of the viewport  -->
-      <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
-        <!-- Offcanvas header -->
-        <div class="offcanvas-header navbar-shadow px-4 mb-2">
-          <h5 class="mt-1 mb-0">Panier</h5>
-          <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <!-- offcanvas body -->
-        <div class="offcanvas-body p-4" data-simplebar="init">
-          <div class="simplebar-wrapper" syle="margin: -24px">
-            <div class="simplebar-content">
-
-              <!-- item 1 -->
-              <div class="d-flex align-items-center mb-3">
-                <a href="templates/shop-single.html" class="d-block flex-shrink-0">
-                  <img src="../img/vcam_1.jpg" alt="Article" class="rounded" width="60">
-                </a>
-                <div class="w-100 ps-2 ms-1">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <!-- Name & Quantity -->
-                    <div class="me-3">
-                      <h4 class="nav-heading fs-md mb-1">
-                        <a href="templates/shop-single.html" class="fw-medium">Zurss 50S</a>
-                      </h4>
-                      <div class="d-flex align-items-center fs-sm">
-                        <span class="me-2">49900 €</span>
-                        <span class="me-2">X</span>
-                        <input type="number" class="form-control form-control-sm px-2" min="1" value="1">
-                      </div>
-                    </div>
-                    <!-- cancel btn -->
-                    <div class="ps-3 border-start">
-                      <a  href="#"
-                          class="d-block text-danger text-decoration-none fs-xl"
-                          data-bs-toggle="tooltip"
-                          title=""
-                          data-bs-original-title="Retirer"
-                          aria-label="Remove"
-                      >
-                        <i class="bi bi-x-circle"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- item 1 end -->
-
+  <main class="page-wrapper">
+    <header>
+      <!-- Navigation block collapsing -->
+      <nav class="navbar navbar-expand-md navbar-dark ori-bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../img/orinoco_logo_white.png" alt="Orinoco logo" width="120" height="30">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-lg-0">
+              <li class="nav-item mt-3">
+                <a class="nav-link" aria-current="page" href="../index.html">Accueil</a>
+              </li>
+            </ul>
+            <div class="navbar-nav nav-item navbar-tool">
+              <a href="#" class="nav-link"><i class="bi bi-search fs-2"></i></a>
+              <a class="nav-link" href="#"><i class="bi bi-person fs-2"></i></a>
+              <div class="border-start me-2"></div>
+              <a  class="nav-link nav-bar-tool-icon-box"
+                  href="#"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#shoppingCart"
+              >
+                <i class="bi bi-cart fs-2 ori-pink"></i>
+                <span class="navbar-tool-badge">2</span>
+              </a>
             </div>
           </div>
         </div>
-        <!-- offcanvas body end -->
+      </nav>
+      <!-- End navigation block collapsing -->
+    </header>
+    <!-- Coupon code modal -->
 
-        <!-- offcanvas footer -->
-        <div class="offcanvas-footer d-block border-top px-4 mb-2">
-          <div class="d-flex justify-content-between mb-4">
-            <span>Total :</span>
-            <span class="h6 mb-0 text-dark">522.25€</span>
+    <!-- cart validation -->
+    <form class="sidebar-enabled sidebar-end needs-validation" novalidate>
+      <div class="container">
+        <div class="row">
+          <!-- content -->
+          <div class="col-lg-8 content py-4">
+            <h1 class="mb-3 pb-4">Commander</h1>
+            <h2 class="h3 pb-3"> Récapitulatif de votre commande</h2>
+            <div class="row mb-4">
+              <div class="col-sm-6 mb-3 pb-1">
+                <label for="name" class="form-label">
+                  Nom
+                  <sup class="text-danger ms-1">*</sup>
+                </label>
+                <input type="text" class="form-control" id="name" require />
+              </div>
+            </div>
+          </div> 
+          <!-- Sidebar -->
+          <div class="col-lg-4 sidebar ori-bg-light pt-5 ps-lg-4 pb-md-2">
+            <h3>Col-lg-4 Sidebar</h3>
+
           </div>
-          <a href="#" class="btn btn-primary btn-sm d-block w-100">
-            <i class="bi bi-credit-card fs-base me-2"></i>
-            Acheter
-          </a>
         </div>
       </div>
+    </form>
 
-      <header>
-        <!-- Navigation block collapsing -->
-        <nav class="navbar navbar-expand-md navbar-dark ori-bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
-              <img src="../img/orinoco_logo_white.png" alt="Orinoco logo" width="120" height="30">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-lg-0">
-                <li class="nav-item mt-3">
-                  <a class="nav-link" aria-current="page" href="../index.html">Accueil</a>
-                </li>
-              </ul>
-              <div class="navbar-nav nav-item navbar-tool">
-                <a href="#" class="nav-link"><i class="bi bi-search fs-2"></i></a>
-                <a class="nav-link" href="#"><i class="bi bi-person fs-2"></i></a>
-                <div class="border-start me-2"></div>
-                <a  class="nav-link nav-bar-tool-icon-box"
-                    href="#"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#shoppingCart"
-                >
-                  <i class="bi bi-cart fs-2 ori-pink"></i>
-                  <span class="navbar-tool-badge">2</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <!-- End navigation block collapsing -->
-      </header>
+  </main>
+  
 
-      <!-- Single Product - info -->
-      <section class="sidebar-enabled sidebar-end border-bottom mb-5 mb-md-6">
-        
-        <div class="container">
-          <div class="row">
-            <!-- Product Image - gallery -->
-            <div class="col-lg-8 content py-4">
-              <h1 class="mb-3 pb-4 ori-gray-dark">Zurss 50S</h1>
-              <!-- Product img -->
-              <div class="product-gallery-preview order-sm-2">
-                <img class="preview" src="../img/vcam_1.jpg" alt="Photo du Zurss 50S">
-              </div>
-              <!-- Sharing -->
-              <div class="d-flex align-items-center justify-content-center justify-content-md-end py-4 pt-md-2 pt-lg-5">
-                <h6 class="text-nowrap my-2 me-3">Partager :</h6>
-                <a href="#" class="btn-social bs-outline bs-facebook ms-2 my-2">
-                  <i class="bi bi-facebook"></i>
-                </a>
-                <a href="#" class="btn-social bs-outline bs-twitter ms-2 my-2">
-                  <i class="bi bi-twitter"></i>
-                </a>
-                <a href="#" class="btn-social bs-outline bs-google ms-2 my-2">
-                  <i class="bi bi-google"></i>
-                </a>
-                <a href="" class="btn-social bs-outline bs-mail ms-2 my-2">
-                  <i class="bi bi-envelope"></i>
-                </a>
-              </div>
-            </div>
-            <!-- Product infos -->
-            <div class="col-lg-4 sidebar ori-bg-light pt-5 ps-lg-4 pb-md-2">
-              <div class="ps-lg-4 pb-5">
-                <!-- Stars rating -->
-                <a href="#" class="d-inline-block text-decoration-none">
-                  <div class="star-rating-lg mt-n1 me-2 star-rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                  </div>
-                  <span class="text-body fs-sm">(4.2) sur 15 votes</span>
-                </a>
-                <!-- Price -->
-                <div class="py-4">
-                  <span class="h4 mb-0 ori-gray-dark">49.900€</span>
-                </div>
-                <!-- Options -->
-                <div class="mb-3 me-lg-n2">
-                  <label for="lense-choice">Choisissez votre lentille :</label>
-                  <select
-                          name="lense-choice"
-                          id="lense-choice"
-                          class="form-select"
-                          aria-label="Selectioner votre lentille"
-                  >
-                    <option value="35mm 1.4">35mm 1.4</option>
-                    <option value="50mm 1.6">50mm 1.4</option>
-                  </select>
-                </div>
-                <!-- Add to cart -->
-                <div class="d-flex mt-4 mb-3">
-                  <input type="number" class="form-control me-3" min="1" id="quantity" value="1"> 
-                  <button class="btn btn-primary d-block w-100" type="button">
-                    Ajouter au panier
-                  </button>
-                </div>
-                <button class="btn btn-outline-secondary d-block w-100 mb-grid-gutter" type="button">
-                  <i class="bi bi-heart me-2 fs-lg"></i>
-                  Ajouter à votre liste
-                </button>
-                <!-- Description -->
-                <h2 class="h4 mt-5 mb-4">Descriptif</h2>
-                <p class="fs-sm mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <hr class="my-4">
-                <ul class="list-unstyled fs-sm">
-                  <li><span class="text-heading fw-medium me-2">SKU:</span>5be1ed3f1c9d44000030b061</li>
-                  <li><span class="text-heading fw-medium me-2">Catégorie:</span>Appareils photos professionnels</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-    </main>
+
     
     <!-- Footer bloc -->
     <footer class="footer ori-bg-darker pt-5 pt-md-6">

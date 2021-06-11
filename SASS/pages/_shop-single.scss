@@ -1,43 +1,29 @@
-section {
-    .sidebar {
-        @include large {
-            position: relative;
-            background-color: #f7f7fc;
-            z-index: 5;
-        }
+
+.sidebar {
+    @include large {
+        position: relative;
+        background-color: #f7f7fc;
+        z-index: 5;
     }
-    .sidebar-enabled {
-        @include large {
-            position: relative;
-        }
+}
+.sidebar-enabled {
+    @include large {
+        position: relative;
     }
-    .sidebar-enabled::before {
-        @include large {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40%;
-            height: 100%;
-            background-color: #f7f7fc;
-            content: '';
-        }
+}
+.sidebar-enabled::before {
+    @include large {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        background-color: #f7f7fc;
+        content: '';
     }
-    .sidebar-enabled .content {
-        @include large {
-            position: relative;
-            padding-left: 2.5rem;
-            background-color: #fff;
-            z-index: 2;
-        }
-    }
-    .sidebar-enabled.sidebar-end .content {
-        @include large {
-            padding-left: .9375rem;
-            padding-right: 2.5rem;
-        }
-    }
-    .sidebar-enabled .content {
+}
+.sidebar-enabled .content {
     @include large {
         position: relative;
         padding-left: 2.5rem;
@@ -45,24 +31,37 @@ section {
         z-index: 2;
     }
 }
-    .sidebar-enabled.sidebar-end::before {
-        @include large {
-            right: 0;
-            left: auto;
-        }
+.sidebar-enabled.sidebar-end .content {
+    @include large {
+        padding-left: .9375rem;
+        padding-right: 2.5rem;
     }
+}
+.sidebar-enabled .content {
+    @include large {
+        position: relative;
+        padding-left: 2.5rem;
+        background-color: #fff;
+        z-index: 2;
+    }
+}
+.sidebar-enabled.sidebar-end::before {
+    @include large {
+        right: 0;
+        left: auto;
+    }
+}
 
-    .content {
-        .product-gallery-preview {
-            position: relative;
-            width: 100%;
-            margin-top: .75rem;
-        }
-        .btn-social {
-            .bi {
-                // border: 1px solid red;
-                font-size: 1.5rem;
-            }
+.content {
+    .product-gallery-preview {
+        position: relative;
+        width: 100%;
+        margin-top: .75rem;
+    }
+    .btn-social {
+        .bi {
+            // border: 1px solid red;
+            font-size: 1.5rem;
         }
     }
 }
