@@ -64,6 +64,10 @@
     color: var(--ori-gray) !important;
   }
 
+  .text-nav {
+    color: #5a5b75;
+  }
+
   /* Fonts Sizes */
   .fs-base {
     font-size: 1rem;
@@ -124,6 +128,10 @@
   /* Layout */
 
   /* Orders */
+
+  /* ***** */
+  /* Forms */
+  /* ***** */
 }
 @media only screen and (min-width: 768px) {
   .mb-md-6 {
@@ -203,7 +211,13 @@
 .btn-outline-secondary.show {
     border-color: #9e9fb4;
     background-color: transparent;
-    color: #4a4b65 !important;
+    color: var(--ori-gray-dark);
+  }
+}
+@media screen {
+  .form-label {
+    padding-left: 1.125rem;
+    color: var(--ori-gray-dark);
   }
 }
 * {
@@ -559,6 +573,10 @@ footer .widget ol > li {
 
 #quantity {
   width: 5rem;
+}
+
+.input-number-sm {
+  max-width: 3.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */

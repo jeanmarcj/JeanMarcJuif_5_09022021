@@ -67,6 +67,10 @@
         color: var(--ori-gray) !important;
     }
 
+    .text-nav  {
+        color: #5a5b75;
+    }
+
     // Fonts utilities
 
     /* Fonts Sizes */
@@ -201,9 +205,16 @@
     .btn-outline-secondary.show {
         border-color: #9e9fb4;
         background-color: transparent;
-        color: #4a4b65 !important;
+        color: var(--ori-gray-dark);
     }
 
-
+    /* ***** */
+    /* Forms */
+    /* ***** */
+    
+    .form-label {
+        padding-left: 1.125rem;
+        color : var(--ori-gray-dark);
+    }
 
 }
