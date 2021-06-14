@@ -34,8 +34,16 @@
         background-color: #2c2d3f;
     }
 
+    .ori-bg-primary {
+        background-color: var(--ori-primary);
+    }
+
     .ori-bg-secondary {
         background-color: var(--ori-secondary);
+    }
+
+    .ori-bg-success {
+        background-color: var(--ori-success);
     }
 
     /* Typo Colors */
@@ -52,7 +60,7 @@
     }
 
     .text-primary {
-        color: var(--ori-primary);
+        color: var(--ori-primary) !important;
     }
 
     .text-dark {
@@ -117,6 +125,9 @@
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+    .pb-6 {
+        padding-bottom: 5rem;
+    }
 
     // BreakPoint medium (tablet)
     .mb-md-6 {
@@ -163,6 +174,13 @@
     
     .opacity-50 {
         opacity: .5;
+    }
+
+    /* ******* */
+    /* Borders */
+    /* ******* */
+    .border-primary {
+        border-color: rgba(118,109,244,0.35) !important;
     }
 
     /* Layout */
@@ -215,6 +233,11 @@
     .form-label {
         padding-left: 1.125rem;
         color : var(--ori-gray-dark);
+    }
+
+    .form-check-input:checked {
+        background-color: var(--ori-primary);
+        border-color: var(--ori-primary);
     }
 
 }
