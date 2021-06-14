@@ -1,0 +1,19 @@
+.view.show {
+    display: block;
+    }
+
+.password-toggle {
+    position: relative;
+    }
+
+.password-toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: .625rem;
+    margin-bottom: 0;
+    padding: .5rem;
+    transform: translateY(-50%);
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+    }
