@@ -85,6 +85,10 @@
     font-size: 0.75rem;
   }
 
+  .fs-ms {
+    font-size: 0.8125rem;
+  }
+
   .fs-sm {
     font-size: 0.875rem;
   }
@@ -363,6 +367,26 @@
 .card-img-top img {
   border-top-left-radius: calc(1rem - 1px);
   border-top-right-radius: calc(1rem - 1px);
+}
+
+.view.show {
+  display: block;
+}
+
+.password-toggle {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.625rem;
+  margin-bottom: 0;
+  padding: 0.5rem;
+  transform: translateY(-50%);
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .nav-link .bi.bi-cart:hover,
