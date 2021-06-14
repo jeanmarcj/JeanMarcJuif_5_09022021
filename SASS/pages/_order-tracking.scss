@@ -1,0 +1,14 @@
+.card-body {
+    .progress {
+        height: 4px;
+        .progress-bar {
+            width: 36%;
+            background-color: var(--ori-primary);
+        }
+    }
+    .tracking-badge {
+        width: 60px !important;
+        height: 60px !important;
+        line-height: 54px !important;
+    }
+}
