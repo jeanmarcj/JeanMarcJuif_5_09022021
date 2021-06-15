@@ -13,7 +13,10 @@
         height: 30px;
         margin-top: 1rem;
         color: rgba(255,255,255,.2);
-        
+        display: none;
+        @include medium {
+            display: block;
+        } 
     }
     .nav-bar-tool-icon-box {
         position: relative;

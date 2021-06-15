@@ -400,6 +400,12 @@
   height: 30px;
   margin-top: 1rem;
   color: rgba(255, 255, 255, 0.2);
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .navbar-tool .border-start {
+    display: block;
+  }
 }
 .navbar-tool .nav-bar-tool-icon-box {
   position: relative;
