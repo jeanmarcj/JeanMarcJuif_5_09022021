@@ -1,52 +1,22 @@
-// Test de l'API fetch
-// response.json retourne une promesse, il faut donc enchainer les promesses
+import { getCameras } from './Modules/fetchCameras.mjs'
+import { displayCamera } from './Modules/displayCamera.mjs'
 
-const getUsers = async function () {
 
-    try {
-        let response = await fetch('https://jsonplaceholder.typicode.com/users')
+main()
+
+// Fonctionnalité principale de la page
+
+async function main() {
+
+    const cameras = await getCameras()
+    console.log('Liste des APN :', cameras)
+    const itemsInCollection = cameras.length
+    console.log(itemsInCollection)
+
+    // Display all cameras
+    for (let i = 0; i < itemsInCollection; i++) {
+        const camera = cameras[i]
+        displayCamera(camera)
+    }
     
-        // On teste l'url
-        if (response.ok) {
-            let data = await response.json()
-            console.log(data)
-        } else {
-            console.error('Retour du serveur : ', response.status)
-        }
-
-    } catch (e) {
-        console.log(e)
-    }
 }
-
-console.log('Users :')
-getUsers()
-
-
-// Méthode avec post
-
-const insertPost = async function (data) {
-    
-    let request = new Request ('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-
-    let response = await fetch(request)
-    let responseData = await response.json()
-
-    if (response.ok) {
-        console.log('Id de votre enregistrement : ' + responseData.id)
-    } else {
-        console.log('Erreur dans l\'envoie des données !')
-    }
-}
-
-insertPost ({
-    name: 'Jean',
-    age: 29
-    }
-)
