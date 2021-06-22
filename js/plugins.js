@@ -22,3 +22,9 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+
+// Boostrap 5 Tooltips Initialization
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
