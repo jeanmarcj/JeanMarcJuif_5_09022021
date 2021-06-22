@@ -1,3 +1,1 @@
-import log from './log.js'
-
-log('Salut France Allemagne !')
+console.log('Page app.js from webpack');
