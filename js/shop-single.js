@@ -8,7 +8,7 @@ async function main() {
     try {
         const camera = await getCamera()
         // console.log('Voici votre APN :', camera)
-        // console.log(camera.name)
+        // console.log(camera.lenses)
         displaySingleCamera(camera)
 
     } catch(error) {

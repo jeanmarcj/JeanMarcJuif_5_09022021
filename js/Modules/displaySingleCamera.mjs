@@ -1,8 +1,19 @@
 function displaySingleCamera(camera) {
     
-    // console.log("J'affiche un model d'APN")
     const templateElement = document.getElementById('single-item-template')
     const cloneElement = document.importNode(templateElement.content, true)
+
+    // console.log("J'affiche un model d'APN")
+    // Display camera's lenses otpions
+    const lensesOption = camera.lenses
+    const lensesOptionLength = lensesOption.length
+    for (let i = 0; i < lensesOptionLength; i++) {
+        // const camera = cameras[i]
+        // displayCamera(camera)
+        console.log('Test boucle :', lensesOption[i])
+        cloneElement.getElementById("lense-choice")
+            .innerHTML += '<option value="' + lensesOption[i] + '">' + lensesOption[i] + '</option>'
+    }
 
     // Product Name
     cloneElement.getElementById("item-name").textContent = camera.name

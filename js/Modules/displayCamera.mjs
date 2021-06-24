@@ -1,5 +1,5 @@
 function displayCamera(camera) {
-    
+
     const templateElement = document.getElementById('itemTemplate')
     const cloneElement = document.importNode(templateElement.content, true)
 
