@@ -1,5 +1,6 @@
 import { getCameras } from './Modules/fetchCameras.mjs'
 import { displayCamera } from './Modules/displayCamera.mjs'
+import { cart } from './Modules/cart.mjs'
 
 
 main()
@@ -13,11 +14,26 @@ async function main() {
         console.log('Liste des APN :', cameras)
         // console.log(itemsInCollection)
         const itemsInCollection = cameras.length
-            // Display all cameras
+        // Display all cameras
         for (let i = 0; i < itemsInCollection; i++) {
             const camera = cameras[i]
             displayCamera(camera)
         }
+
+        //Cart management
+
+        if (localStorage.getItem("cartIsEmpty") == "true") {
+            console.log("Votre panier est vide")
+            
+            // Le badge de l'icone doit disparaître
+            // La fenêtre du panier doit être vide
+            // Le total du panier = 0
+
+        } else {
+            console.log("Votre Panier est rempli")
+            console.log("Etat de l'objet panier : ", cart)
+        }
+
 
     } catch(error) {
         // alert("Erreur de connection avec le serveur ! \n" + error)
