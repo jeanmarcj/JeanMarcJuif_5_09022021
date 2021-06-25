@@ -1,4 +1,4 @@
-// Get the item id to fetch
+// Get the item with th id given in the URI
 let parsedUrl = new URL(window.location.href);
 // console.log(parsedUrl.searchParams.get("id"));
 

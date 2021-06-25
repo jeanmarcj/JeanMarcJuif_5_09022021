@@ -1,3 +1,4 @@
+import { getOneCamera } from './fetchCameraById.mjs'
 // JavaScript Object for the cart management
 
 let cart = {
@@ -18,33 +19,44 @@ function cartInitialization () {
 cartInitialization()
 
 // add item in the cart
-function addToCart(itemId) {
+async function addToCart(itemId, quantity) {
+    
     // Fetch the article
-    // Create the object
+    const camera = await getOneCamera(itemId)
+    console.log('Voici votre APN :', camera)
+
+    // Create JSobject
     const itemToAdd = {
         id: itemId,
-        name: "Zurss 50S",
-        imgUrl: "img/vcam_1.jpg",
-        quantity: 2,
-        price: "49900"
+        name: camera.name,
+        imgUrl: camera.imageUrl,
+        quantity: quantity,
+        price: camera.price
     }
     
     //Add the item in the array
     cart.items.push(itemToAdd)
-    console.log('Items in cart :', cart.items)
+    // console.log(cart.items.length, ' Article(s) dans votre panier')
+    // console.log('Liste des articles dans votre panier :', cart.items)
     
     //Compute the total amount to add
     const amountToAdd = computeTotalAmount(itemToAdd.price, itemToAdd.quantity)
     cart.subtotal += amountToAdd
-    console.log("S/Total du panier : ", cart.subtotal)
+    // console.log("S/Total du panier : ", cart.subtotal)
 
     //Change the cart.isEmpty value
-    cart.isEmpty = false
-    localStorage.setItem("cartIsEmpty", false)
-    
+    // console.log(typeof cart.items.length)
+    if (cart.items.lenght < 1) {
+        cart.isEmpty = true
+        localStorage.setItem("cartIsEmpty", true)
+    } else {
+        cart.isEmpty = false
+        localStorage.setItem("cartIsEmpty", false)
+    }
 }
 
-addToCart("220766")
+addToCart("5be9c4471c9d440000a730e8", 1)
+addToCart("5be1ed3f1c9d44000030b061", 2)
 
 //Compute the price amount to add
 function computeTotalAmount(price, quantity) {
