@@ -18,9 +18,33 @@ function cartInitialization () {
 
 cartInitialization()
 
+// ******************************
+// check if items are in the cart
+// ******************************
+
+function fetchItemsInLocalStorage() {
+    const local = JSON.parse(localStorage.getItem("items"))
+    if (local != null) {
+        console.log('Articles présents dans localStorage ! (from cart.mjs)', local)
+        console.log(typeof(local))
+        
+        for (const [key, value] of Object.entries(local)) {
+            console.log(`${key}: ${value}`)
+        }
+    } else {
+        console.log('Aucun articles dans localStorage cart.mjs !')
+    }
+}
+
+fetchItemsInLocalStorage()
+
+
+// ********************
 // add item in the cart
+// ********************
+
 async function addToCart(itemId, quantity) {
-    
+
     // Fetch the article
     const camera = await getOneCamera(itemId)
     console.log('Voici votre APN :', camera)
@@ -44,6 +68,9 @@ async function addToCart(itemId, quantity) {
     cart.subtotal += amountToAdd
     // console.log("S/Total du panier : ", cart.subtotal)
 
+    // **** Save cart item in local Storage as object ****
+    localStorage.setItem("items", JSON.stringify(cart.items))
+
     //Change the cart.isEmpty value
     // console.log(typeof cart.items.length)
     if (cart.items.lenght < 1) {
@@ -55,10 +82,13 @@ async function addToCart(itemId, quantity) {
     }
 }
 
-addToCart("5be9c4471c9d440000a730e8", 1)
-addToCart("5be1ed3f1c9d44000030b061", 2)
+addToCart("5be9c4471c9d440000a730e8", 2)
+addToCart("5be1ed3f1c9d44000030b061", 1)
+// addToCart("5be1ed3f1c9d44000030b061", 1)
 
-//Compute the price amount to add
+// ********************************
+// Compute the price amount to add
+// ********************************
 function computeTotalAmount(price, quantity) {
     let parsedPrice = parseInt(price, 10)
     if (isNaN(parsedPrice)) {
