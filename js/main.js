@@ -14,7 +14,7 @@ async function main() {
         console.log('Liste des APN :', cameras)
         
         const itemsInCollection = cameras.length
-        console.log(typeof(cameras))
+        // console.log(typeof(cameras))
         // Display all cameras
         for (let i = 0; i < itemsInCollection; i++) {
             const camera = cameras[i]

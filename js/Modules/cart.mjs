@@ -26,11 +26,15 @@ function fetchItemsInLocalStorage() {
     const local = JSON.parse(localStorage.getItem("items"))
     if (local != null) {
         console.log('Articles présents dans localStorage ! (from cart.mjs)', local)
-        console.log(typeof(local))
-        
-        for (const [key, value] of Object.entries(local)) {
-            console.log(`${key}: ${value}`)
+        const properties = Object.keys(local);
+        //Nb d'articles dans le panier
+        console.log('NB articles dans local : ', Object.keys(local).length)
+
+        for (const propertie of properties) {
+            let item = local[propertie];
+            console.log('Dans local : ', item.name);
         }
+        
     } else {
         console.log('Aucun articles dans localStorage cart.mjs !')
     }
@@ -47,7 +51,7 @@ async function addToCart(itemId, quantity) {
 
     // Fetch the article
     const camera = await getOneCamera(itemId)
-    console.log('Voici votre APN :', camera)
+    // console.log('Voici votre APN :', camera)
 
     // Create JSobject
     const itemToAdd = {
