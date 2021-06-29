@@ -33,13 +33,19 @@ async function main() {
     if (localStorage.getItem("cartIsEmpty") == "true") {
         console.log("Votre panier est vide")
         
-        // Le badge de l'icone doit disparaître
+        // badge icon should print 0
+        // document.getElementById("badge").textContent = "0"
         // La fenêtre du panier doit être vide
+
         // Le total du panier = 0
+       
 
     } else {
-        console.log("Votre Panier est rempli")
+        
+        console.log("Vous avez des articles dans votre panier !")
         console.log("Etat de l'objet panier : ", cart)
+        // console.log("Nb Article dans l'objet cart ", cart.items.length)
+        
     }
 }
 
