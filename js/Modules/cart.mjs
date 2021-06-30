@@ -70,7 +70,8 @@ function fetchItemsInLocalStorage() {
         cart.isEmpty = false
 
         // 4° Sort & re-write cart array
-        sortCartArray(cart.items)
+        const uniqueArray = sortCartArray(cart.items)
+        console.log('Return uniqueArray', uniqueArray)
 
         
     } else {
@@ -170,58 +171,31 @@ function sortCartArray(itemsArray) {
         return 0;
     })
 
-    console.log('sortCartArray : sorted by id ', itemsArray)
+    // console.log('sortCartArray : sorted by id ', itemsArray)
     
-    // The first element of each element inside the array store the total quantity 
-    // The result is the same array with the total quantity in the first element
+    // The last element of each item's id inside the array store the total quantity 
+    // The result is the same array with the total quantity stored in the last element
     const properties = Object.keys(itemsArray);
-    // console.log('SortCartArray : properties :', properties) // 0:"0", 1:"1"
     const totalItemInArray = Object.keys(itemsArray).length
-    // console.log('SortCartArray : totalItemInArray : ', totalItemInArray)
-    
 
     for (const propertie of properties) {
         let item = itemsArray[propertie];
         let item1 = itemsArray[parseInt(propertie, 10) + 1];
         let tempQuantity = parseInt(itemsArray[propertie].quantity);
-        // console.log('properties ', item1)
-
-        // console.log(item.name, item.quantity)
         
         if (parseInt(propertie, 10) + 1 < totalItemInArray && item.id === item1.id)  {
             tempQuantity += item1.quantity;
             item1.quantity = tempQuantity;
-
         } else {
             tempQuantity = parseInt(itemsArray[propertie].quantity);
         }
     }
 
-    //Return a new array without duplicated objects
-    // function removeDuplicates(originalArray, prop) {
-    //     var newArray = [];
-    //     var lookupObject = {};
-
-    //     for (var i in originalArray) {
-    //         lookupObject[originalArray[i][prop]] = originalArray[i];
-    //     }
-
-    //     for (i in lookupObject) {
-    //         newArray.push(lookupObject[i]);
-    //     }
-    //     return newArray;
-    // }
-
-    // let uniqueArray = removeDuplicates(itemsArray, "name");
+    // Remove the duplicate items inside the array. Only the last entrie is stored in a new array
+    // Return 'uniqueArray' with unique ID and good quantites computed before
     const uniqueArray = [...new Map(itemsArray.map(item => [item["name"], item])).values()]
-    // console.log("uniqueArray is: " + JSON.stringify(uniqueArray));
-    console.log('uniqueArray parsed ', Array.from(uniqueArray));
-
-    // const itemsArrayFilter = itemsArray.filter(function(value) {
-    //     return value.indexOf("5be1ed3f1c9d44000030b061")
-    // });
-    
-    
+    // console.log('uniqueArray parsed ', Array.from(uniqueArray));
+    return uniqueArray;
 
 }
 
