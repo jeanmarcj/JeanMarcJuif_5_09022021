@@ -7,9 +7,6 @@ function displaySingleCamera(camera) {
     const lensesOption = camera.lenses
     const lensesOptionLength = lensesOption.length
     for (let i = 0; i < lensesOptionLength; i++) {
-        // const camera = cameras[i]
-        // displayCamera(camera)
-        // console.log('Test boucle :', lensesOption[i])
         cloneElement.getElementById("lense-choice")
             .innerHTML += '<option value="' + lensesOption[i] + '">' + lensesOption[i] + '</option>'
     }
