@@ -176,6 +176,13 @@
         <!-- End navigation block collapsing -->
       </header>
 
+      <!-- Errors container -->
+      <div class="container">
+        <div id="error" class="my-5">
+          <p id="error-message" class="h5"></p>
+        </div>
+      </div>
+
       <!-- Single Product - info -->
       <section class="sidebar-enabled sidebar-end border-bottom mb-5 mb-md-6">  
         <div class="container">
@@ -239,9 +246,26 @@
                   <!-- Add to cart -->
                   <div class="d-flex mt-4 mb-3">
                     <input type="number" class="form-control me-3" min="1" id="quantity" value="1"> 
-                    <button class="btn btn-primary d-block w-100" type="button" title="Ajouter au panier">
+                    <!-- <button
+                            class="btn-addtocart btn btn-primary d-block w-100"
+                            type="button"
+                            title="Ajouter au panier"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-item-id=""
+                    >
                       Ajouter au panier
-                    </button>
+                    </button> -->
+                    <a  href="#"
+                        class="btn-addtocart btn btn-primary d-block w-100"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Ajouter au panier"
+                        data-item-id=""
+                        id="btn-addtocart"
+                    >
+                    Ajouter au Panier
+                    </a>
                   </div>
                   <button class="btn btn-outline-secondary d-block w-100 mb-grid-gutter" type="button" title="Ajouter à votre liste de souhaits">
                     <i class="bi bi-heart me-2 fs-lg"></i>

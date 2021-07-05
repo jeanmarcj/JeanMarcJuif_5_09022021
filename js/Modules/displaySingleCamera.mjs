@@ -23,6 +23,9 @@ function displaySingleCamera(camera) {
     // Product descriptions
     cloneElement.getElementById("item-description").textContent = camera.description;
     
+    // Add to Cart ID :
+    cloneElement.getElementById("btn-addtocart").setAttribute("data-item-id", camera._id);
+
     // Product id
     cloneElement.getElementById("item-id").textContent = camera._id;
 
