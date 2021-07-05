@@ -1,4 +1,4 @@
-import { getOneCamera } from './fetchCameraById.mjs'
+import { getOneCamera } from './fetchCameraById.mjs';
 // JavaScript Object for the cart management
 
 let cart = {
@@ -12,96 +12,85 @@ let cart = {
 }
 
 // Cart Initialization
-function cartInitialization () {
-    localStorage.setItem("cartIsEmpty", true)
-}
+function cartInitialization() {
+    // localStorage.setItem("cartIsEmpty", true);
 
-cartInitialization()
-
-// *****************************************
-// Check if there are items on local storage
-// *****************************************
-
-function fetchItemsInLocalStorage() {
-    const local = JSON.parse(localStorage.getItem("items"))
-
-    if (local != null) {
-        
-        // Return an array of properties name inside the 'local' object (["0"], ["1"] ...)
-        const properties = Object.keys(local);
-        
-        // 1° Update the badge incon with the number of items in the cart
-        // console.log('NB articles localStorage : ', Object.keys(local).length)
-        const totalItemInCart = Object.keys(local).length
-        updateBadgeIcon(totalItemInCart)
-
-        // 2° Create & Add items from the localStorage to the cart items array
-        for (const propertie of properties) {
-            let item = local[propertie];
-            // console.log('Dans local nom de l\'article : ', item.name);
-            // console.log('Dans localStorage : ', JSON.stringify(item))
-            
-            // Create JSobject
-            const itemToAdd = {
-                id: item.id,
-                name: item.name,
-                imgUrl: item.imgUrl,
-                quantity: item.quantity,
-                price: item.price
-            }
-
-            // console.log('Dans localStorage, objet créé : ', itemToAdd)
-            cart.items.push(itemToAdd)
-
-            // 3° Print in cart template the items list
-            displayCartItems(itemToAdd, totalItemInCart)
-
-            // 4° Compute the total amount
-            const amountToAdd = computeTotalAmount(itemToAdd.price, itemToAdd.quantity)
-            cart.subtotal += amountToAdd
-            let formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal)
-            // console.log('Total HT du panier en cours :', cart.subtotal)
-            document.getElementById("totalWhithoutTaxes").textContent = formatedPrice
-
-        }
-
-        // 3° Update cart isEmpty property 
-        localStorage.setItem("cartIsEmpty", false)
-        cart.isEmpty = false
-
-        // 4° Sort & re-write cart array
-        const uniqueArray = sortCartArray(cart.items)
-        console.log('Return uniqueArray', uniqueArray)
-
-        
-    } else {
-        console.log('Aucun article dans localStorage cart.mjs !')
-        
-        // 1° Update the badge icon with number 0
-        updateBadgeIcon(0)
-        
+    clearCart.onclick = () => {
+        localStorage.clear();
+        cart.items = [];
+        cart.subtotal = 0;
+        updateBadgeIcon(0);
+        displayCartItems(cart);
+        localStorage.setItem("cartIsEmpty", true);
+        cart.isEmpty = true;
     }
 }
 
-fetchItemsInLocalStorage()
+cartInitialization();
+
+// *****************************
+// Call the localStorage Manager
+// *****************************
+
+
+/**
+ * Read the localStorage 'items' if exist
+ * Update cart.items array after fetch & sort
+ * Output on screen the results
+ */
+ function localStorageManager() {
+    
+    // Check if there are items inside localStorage array
+    const local = JSON.parse(localStorage.getItem("items"));
+
+    if (local != null) {
+        
+        // 1° Fetch items and update cart.items array
+        fetchItemsInLocalStorage(local);
+        localStorage.setItem("cartIsEmpty", false);
+        cart.isEmpty = false;
+        
+        // 2° Sort and create an unique array items with quantities
+        let uniqueItemsArray = sortCartArray(cart.items);
+        
+        // 3° Sort and create an unique array items with quantities
+        cart.items = sortCartArray(cart.items);
+
+        // 4° Update cart.subtotal
+        cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
+
+        // 5° Print the item(s) number in the badge icon
+        updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
+
+        // 6° Print item(s) in the cart template
+        displayCartItems(cart);
+
+        // 7° Print total amount
+        const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
+        document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
+
+        // 8° Save cart item in local Storage as object
+        localStorage.setItem("items", JSON.stringify(cart.items));
+
+    } else {
+        console.log('LocalManager : aucun article à gérer !');
+        updateBadgeIcon(0);
+        localStorage.setItem("cartIsEmpty", true);
+        cart.isEmpty = true;
+    }
+}
+
+localStorageManager();
 
 
 // ********************
-// add item in the cart
+// add item in cart
 // ********************
 
 async function addToCart(itemId, quantity) {
 
     // Fetch the article
     const camera = await getOneCamera(itemId)
-    // console.log('Voici votre APN :', camera)
-
-    // TODO:
-    // Vérifier si l'id de l'article existe déjà dans le tableau
-    let itemsCartArray = cart.items
-    console.log('Array brut', itemsCartArray)
-    // itemsCartArray.sort()
-    // console.log('Array trié', itemsCartArray)
     
     // Create JSobject
     const itemToAdd = {
@@ -112,26 +101,103 @@ async function addToCart(itemId, quantity) {
         price: camera.price
     }
     
-    //Add the item in the array
+    // Add item in cart.item array
     cart.items.push(itemToAdd)
-    // console.log(cart.items.length, ' Article(s) dans votre panier')
-    // console.log('Liste des articles dans votre panier :', cart.items)
+    // console.log('Add Item : ', cart.items)
 
-    // **** Save cart item in local Storage as object ****
-    localStorage.setItem("items", JSON.stringify(cart.items))
+    // Sort and create an unique array items with quantities
+    cart.items = sortCartArray(cart.items);
+
+    // Print the item(s) number in the badge icon
+    updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
     
-    //Compute the total amount to add
-    const amountToAdd = computeTotalAmount(itemToAdd.price, itemToAdd.quantity)
-    cart.subtotal += amountToAdd
-    // console.log("S/Total du panier : ", cart.subtotal)
+    // Update cart.subtotal
+    cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
 
-    // **** Change the cart.isEmpty value ***
-    cart.isEmpty = false
-    localStorage.setItem("cartIsEmpty", false)
+    // Print item(s) in the cart template
+    displayCartItems(cart);
+
+    // Save cart item in local Storage as object
+    localStorage.setItem("items", JSON.stringify(cart.items))
+    localStorage.setItem("cartIsEmpty", false);
+    cart.isEmpty = false;
+    
 }
-// addToCart("5be1ed3f1c9d44000030b061", 2)
-// addToCart("5be9c4471c9d440000a730e8", 1)
-// addToCart("5be1ed3f1c9d44000030b061", 1)
+/**
+ * 
+ * @param {string} id the item id 
+ * @returns {event} cart.subtotal, badge & local Storage are updated
+ */
+
+const changeQuantity = (id) => {
+    console.log('cart ? ChangeQantity : ', cart);
+    return (event) => {
+        cart.items.find(item => item.id === id).quantity = event.target.value;
+        
+        cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
+
+        updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
+        
+        displayCartItems(cart);
+
+        localStorage.setItem("items", JSON.stringify(cart.items));
+    };
+}
+
+/**
+ * 
+ * @param {string} id 
+ * @returns 
+ */
+const removeItems = (id) => {
+    return () => {
+        
+        const indexOfItemToBeDeleted = cart.items.indexOf(cart.items.find(item => item.id === id));
+
+        cart.items.splice(indexOfItemToBeDeleted, 1);
+
+        cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
+
+        updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
+
+        displayCartItems(cart);
+
+        localStorage.setItem("items", JSON.stringify(cart.items));
+        console.log('RemoveItems', cart.items.lenght);
+
+    };
+}
+
+
+
+// *********************************************
+// Read localStorage & update cart.items
+// *********************************************
+
+function fetchItemsInLocalStorage(localStorageItems) {
+
+    // 1° Get the items inside localStorage
+    // Return an array of properties name inside the 'local' object (["0"], ["1"] ...)
+    const properties = Object.keys(localStorageItems);
+
+    // Create & Add items from the localStorage to the cart items array
+    for (const propertie of properties) {
+        let item = localStorageItems[propertie];
+        
+        // Create JSobject
+        const itemToAdd = {
+            id: item.id,
+            name: item.name,
+            imgUrl: item.imgUrl,
+            quantity: item.quantity,
+            price: item.price
+        }
+
+        cart.items.push(itemToAdd)
+
+    }
+
+}
 
 // ********************************
 // Compute the price amount to add
@@ -160,7 +226,6 @@ function updateBadgeIcon(totalItemInCart) {
 // Should be a module ?
 // ********************************
 function sortCartArray(itemsArray) {
-    // console.log('Je veux trier le tableau : ', itemsArray)
     
     // Sort the given array by id
     itemsArray.sort(function compare(a, b) {
@@ -170,8 +235,6 @@ function sortCartArray(itemsArray) {
             return 1;
         return 0;
     })
-
-    // console.log('sortCartArray : sorted by id ', itemsArray)
     
     // The last element of each item's id inside the array store the total quantity 
     // The result is the same array with the total quantity stored in the last element
@@ -192,65 +255,102 @@ function sortCartArray(itemsArray) {
     }
 
     // Remove the duplicate items inside the array. Only the last entrie is stored in a new array
-    // Return 'uniqueArray' with unique ID and good quantites computed before
-    const uniqueArray = [...new Map(itemsArray.map(item => [item["name"], item])).values()]
+    // Return 'uniqueArray' with unique ID and good quantities computed before
+    const uniqueItemsArray = [...new Map(itemsArray.map(item => [item["name"], item])).values()]
     // console.log('uniqueArray parsed ', Array.from(uniqueArray));
-    return uniqueArray;
+    return uniqueItemsArray;
 
 }
 
-// ********************************
+
+// *************************************
 // Display the item in the cart template
 // Should be a module ?
-// ********************************
-function displayCartItems(itemToPrint, totalItemInCart) {
-    // console.log(itemToPrint.imgUrl)
-    
-    document.getElementById("cart-state").textContent = totalItemInCart + " Article(s) dans votre panier"
+// *************************************
 
-    //Update the wrapper
-    let singleItemUrl = "http://127.0.0.1:5500/templates/shop-single.html?id=" + itemToPrint.id
-    let formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(itemToPrint.price)
-    
-    let htmlWrapper = document.getElementById("cart-item-wrapper")
+function displayCartItems(cart) {
 
-    let htmlTemplate =
-        `<div class="d-flex align-items-center mb-3">
+    document.getElementById("cart-state").textContent = cart.items.length !== 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) + " article(s) dans votre panier" : "Votre panier Orinoco est vide.";
+
+    const htmlWrapper = document.getElementById("cart-item-wrapper");
+    htmlWrapper.innerHTML = '';
+
+    for (const propertie in cart.items) {
+        let item = cart.items[propertie];
+
+        //Update the cart template wrapper
+        let singleItemUrl = "http://127.0.0.1:5500/templates/shop-single.html?id=" + item.id;
+        let formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item.price);
+
+        let htmlTemplate =
+        `<div class="d-flex align-items-center mb-3" id="${item.id}">
             <a href="${singleItemUrl}" class="d-block flex-shrink-0">
-                <img src="${itemToPrint.imgUrl}" alt="Photo de l'appareil photo ${itemToPrint.name}" class="rounded" width="60">
+                <img src="${item.imgUrl}" alt="Photo de l'appareil photo ${item.name}" class="rounded" width="60">
             </a>
             <div class="w-100 ps-2 ms-1">
                 <div class="d-flex align-items-center justify-content-between">
                     <!-- Name & Quantity -->
                     <div class="me-3">
                         <h4 class="nav-heading fs-md mb-1">
-                            <a href="${singleItemUrl}" class="fw-medium">${itemToPrint.name}</a>
+                            <a href="${singleItemUrl}" class="fw-medium">${item.name}</a>
                         </h4>
                         <div class="d-flex align-items-center fs-sm">
                             <span class="me-2">${formatedPrice}</span>
                             <span class="me-2">X</span>
-                            <input type="number" class="form-control form-control-sm px-2" min="1" value="${itemToPrint.quantity}">
+                            <input
+                                    type="number"
+                                    id="quantity"
+                                    class="form-control form-control-sm px-2 quantity-manager"
+                                    min="1"
+                                    max="10"
+                                    value="${item.quantity}"
+                                    data-item-id="${item.id}"
+                                    index="${propertie}"
+                                    data-change-quantity-id="${item.id}"
+                            >
                         </div>
                     </div>
                     <!-- cancel btn -->
-                    <div class="ps-3 border-start">
-                    <a  href="#"
-                        class="d-block text-danger text-decoration-none fs-xl"
+                    <div class="ps-3 border-start" id="cancel-btn">
+                    <div
+                        class="d-block text-danger text-decoration-none fs-xl cancel-button"
                         data-bs-toggle="tooltip"
-                        title=""
+                        title="Retirer cet article"
                         data-bs-original-title="Retirer"
                         aria-label="Remove"
+                        id="removeItem"
+                        data-remove-id="${item.id}"
                     >
                       <i class="bi bi-x-circle"></i>
-                    </a>
+                    </div>
                   </div>
                 </div>
             </div>
-        </div>`
+        </div>`;
     
-    htmlWrapper.innerHTML += htmlTemplate
+        htmlWrapper.innerHTML += htmlTemplate;
 
+    }
+
+    const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
+
+    document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
+
+    // Add listerners for quantity on change
+    const quantityManagers = document.querySelectorAll('.quantity-manager');
+
+    for (const inputQuantity of quantityManagers) {
+        const idItem = inputQuantity.getAttribute('data-change-quantity-id');
+        inputQuantity.addEventListener('change', changeQuantity(idItem));
+    }
+
+    // Add listerners for the cancel-button
+    const cancelButtons = document.querySelectorAll('.cancel-button');
+
+    for (const cancelButton of cancelButtons) {
+        const idItem = cancelButton.getAttribute('data-remove-id');
+        cancelButton.addEventListener('click', removeItems(idItem));
+    }
 }
 
-
-export { cart }
+export { cart, addToCart }
