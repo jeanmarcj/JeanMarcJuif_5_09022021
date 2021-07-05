@@ -94,64 +94,38 @@
       <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
         <!-- Offcanvas header -->
         <div class="offcanvas-header navbar-shadow px-4 mb-2">
-          <h5 class="mt-1 mb-0">Panier</h5>
+          <h5 class="mt-1 mb-0" id="cart-state">Votre Panier Orinoco est vide.</h5>
           <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- offcanvas body -->
         <div class="offcanvas-body p-4" data-simplebar="init">
           <div class="simplebar-wrapper" syle="margin: -24px">
             <div class="simplebar-content">
-
-              <!-- item 1 -->
-              <div class="d-flex align-items-center mb-3">
-                <a href="templates/shop-single.html" class="d-block flex-shrink-0">
-                  <img src="../img/vcam_1.jpg" alt="Article" class="rounded" width="60">
-                </a>
-                <div class="w-100 ps-2 ms-1">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <!-- Name & Quantity -->
-                    <div class="me-3">
-                      <h4 class="nav-heading fs-md mb-1">
-                        <a href="templates/shop-single.html" class="fw-medium">Zurss 50S</a>
-                      </h4>
-                      <div class="d-flex align-items-center fs-sm">
-                        <span class="me-2">49900 €</span>
-                        <span class="me-2">X</span>
-                        <input type="number" class="form-control form-control-sm px-2" min="1" value="1">
-                      </div>
-                    </div>
-                    <!-- cancel btn -->
-                    <div class="ps-3 border-start">
-                      <a  href="#"
-                          class="d-block text-danger text-decoration-none fs-xl"
-                          data-bs-toggle="tooltip"
-                          title=""
-                          data-bs-original-title="Retirer"
-                          aria-label="Remove"
-                      >
-                        <i class="bi bi-x-circle"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+  
+              <!-- item -->
+              <div id="cart-item-wrapper">
               </div>
-              <!-- item 1 end -->
-
+              <!-- item end -->
+  
             </div>
           </div>
         </div>
         <!-- offcanvas body end -->
-
+  
         <!-- offcanvas footer -->
         <div class="offcanvas-footer d-block border-top px-4 mb-2">
           <div class="d-flex justify-content-between mb-4">
             <span>Total :</span>
-            <span class="h6 mb-0 text-dark">522.25€</span>
+            <span class="h6 mb-0 text-dark" id="totalWhithoutTaxes">0,00 €</span>
           </div>
-          <a href="checkout.html" class="btn btn-primary btn-sm d-block w-100">
+          <a href="./templates/checkout.html" class="btn btn-primary btn-sm d-block w-100">
             <i class="bi bi-credit-card fs-base me-2"></i>
-            Acheter
+            Passer la commande
           </a>
+          <button id="clearCart" class="btn btn-outline-danger btn-sm w-100 mt-1">
+            <i class="bi bi-x-square fs-base me-2"></i>
+            Vider
+          </button>
         </div>
       </div>
 
