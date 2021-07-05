@@ -102,7 +102,7 @@
     <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
       <!-- Offcanvas header -->
       <div class="offcanvas-header navbar-shadow px-4 mb-2">
-        <h5 class="mt-1 mb-0" id="cart-state">Panier vide</h5>
+        <h5 class="mt-1 mb-0" id="cart-state">Votre Panier Orinoco est vide.</h5>
         <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <!-- offcanvas body -->
@@ -128,7 +128,7 @@
         </div>
         <a href="./templates/checkout.html" class="btn btn-primary btn-sm d-block w-100">
           <i class="bi bi-credit-card fs-base me-2"></i>
-          Acheter
+          Passer la commande
         </a>
         <button id="clearCart" class="btn btn-outline-danger btn-sm w-100 mt-1">
           <i class="bi bi-x-square fs-base me-2"></i>
@@ -204,22 +204,22 @@
         <template id="itemTemplate">
           <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
             <div class="card card-product card-hover text-center">
-              <a href="./templates/shop-single.html" class="card-img-top" id="item_single-link">
+              <a href="./templates/shop-single.html" class="card-img-top card-single-link">
                 <img  src=""
                       alt="Photo de l'appareil photo"
                       title="Cliquez pour voir les informations"
                       width="516"
                       height="440"
                       loading="lazy"
-                      id="item-img_src"
+                      class="item-img_src"
                 >
               </a>
               <div class="card-body">
                 <a href="#" class="meta-link fs-xs mb-1">Appareil Photo</a>
                 <h3 class="fs-md fw-medium mb-2">
-                  <a href="./templates/shop-single.html" id="item-name" class="meta-link"></a>
+                  <a href="./templates/shop-single.html" class="meta-link item-name"></a>
                 </h3>
-                <span class="text-heading fw-semibold" id="item-price"></span>
+                <span class="text-heading fw-semibold item-price"></span>
               </div>
               <div class="card-footer">
                 <div class="star-rating mt-n1">
@@ -238,7 +238,13 @@
                     <i class="bi bi-heart"></i>
                   </a>
                   <span class="btn-divider"></span>
-                  <a href="#" class="btn-addtocart" data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter au panier">
+                  <a  href="#"
+                      class="btn-addtocart"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Ajouter au panier"
+                      data-item-id=""
+                  >
                     <i class="bi bi-cart-plus"></i>
                   </a>
                 </div>
@@ -351,5 +357,12 @@
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 
 </body>
+<!-- <script type="text/javascript">
+  function changeQuantity(e) {
+    console.log(e.target.getAttribute('index'));
+    console.log('Salut');
+    console.log('Quantité modifiée : ', this.value);
+  }
+</script> -->
 
 </html>
