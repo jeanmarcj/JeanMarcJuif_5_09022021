@@ -7,10 +7,7 @@ async function getCameras() {
     try {
 
         // const response = await fetch(url)
-        return fetch(url)
-        .then(function(httpBodyResponse) {
-            return httpBodyResponse.json()
-        })
+        return (await fetch(url)).json();
 
         //Old code
         // Retourne une promise. Transforme le contenu JSON en objet
