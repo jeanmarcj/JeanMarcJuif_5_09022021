@@ -64,7 +64,7 @@ function displayError(message, error, errorClass) {
 // Call the function addToCart on
 // ********************************
 
-function addToCartAction() {
+async function addToCartAction() {
     let itemId = this.getAttribute("data-item-id");
     addToCart(itemId, 1);
 }
