@@ -156,8 +156,13 @@ const changeQuantity = (id) => {
         displayCartItems(cart);
 
         // 7° Print total amount
-        const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
-        document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
+        // const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
+        // document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
+        const formatedSubTotal = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
+        const totalWhithoutTaxes = document.querySelectorAll('.totalWithoutTaxes');
+        for (const eltTotal of totalWhithoutTaxes) {
+            eltTotal.textContent = formatedSubTotal;
+        }
 
         // 8° Save cart item in local Storage as object
         localStorage.setItem("items", JSON.stringify(cart.items));
@@ -334,9 +339,13 @@ function displayCartItems(cart) {
 
     }
 
-    const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
-
-    document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
+    // Update the total without taxes :
+    const formatedSubTotal = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
+    const totalWhithoutTaxes = document.querySelectorAll('.totalWithoutTaxes');
+    for (const eltTotal of totalWhithoutTaxes) {
+        eltTotal.textContent = formatedSubTotal;
+    }
+    // document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
 
     // Add listerners for quantity on change
     const quantityManagers = document.querySelectorAll('.quantity-manager');
