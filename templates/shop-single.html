@@ -245,7 +245,14 @@
                   </div>
                   <!-- Add to cart -->
                   <div class="d-flex mt-4 mb-3">
-                    <input type="number" class="form-control me-3" min="1" id="quantity" value="1"> 
+                    <input
+                            type="number"
+                            class="form-control me-3"
+                            id="quantity-input"
+                            min="1"
+                            max="10"
+                            value="1"
+                    > 
                     <!-- <button
                             class="btn-addtocart btn btn-primary d-block w-100"
                             type="button"
@@ -280,7 +287,10 @@
                       <span class="text-heading fw-medium me-2">SKU :</span>
                       <span id="item-id"></span>
                     </li>
-                    <li><span class="text-heading fw-medium me-2">Catégorie :</span>Appareils photos professionnels</li>
+                    <li>
+                      <span class="text-heading fw-medium me-2">Catégorie :</span>
+                      Appareils photos professionnels
+                    </li>
                   </ul>
                 </div>
               </div>

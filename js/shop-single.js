@@ -47,7 +47,8 @@ function displayError(message, error, errorClass) {
 // Call the function addToCart onclick
 // ***********************************
 
-function addToCartAction() {
+async function addToCartAction() {
     let itemId = this.getAttribute("data-item-id");
-    addToCart(itemId, 1);
+    let quantity = parseInt(document.querySelector('#quantity-input').value);
+    await addToCart(itemId, quantity);
 }
