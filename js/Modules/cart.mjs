@@ -6,7 +6,7 @@ let cart = {
     items: [],
     subtotal: 0,
     taxPercentage: 20,
-    Shipping: 15,
+    shipping: 15,
     totalToBePaid: 0,
     isEmpty: true,
 }
