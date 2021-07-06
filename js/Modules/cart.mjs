@@ -91,10 +91,12 @@ const changeQuantity = (id) => {
 }
 
 /**
- * Renvooie msgd kjbg ljh lgl
+ * Efface un article du panier en cours.
+ * L'articel est identifié par son id.
+ * L'évènement est détecté au click sur l'icône dans le panier.
  * 
- * @param {string} id L'id du machin
- * @returns {function} La fonction de l'event machin
+ * @param {string} id L'id de l'article à effacer.
+ * @returns {function} La fonction renvoyée de l'event onclick.
  */
  const removeItems = (id) => {
     return () => {
@@ -202,7 +204,7 @@ function fetchItemsInLocalStorage(localStorageItems) {
 
 // ********************************
 // Compute the price amount to add
-// Should be a module ?
+// A effacer ????
 // ********************************
 function computeTotalAmount(price, quantity) {
     let parsedPrice = parseInt(price, 10)
@@ -215,7 +217,7 @@ function computeTotalAmount(price, quantity) {
 
 // ********************************
 // Update the badge icon in nav bar
-// Should be a module ?
+// 
 // ********************************
 function updateBadgeIcon(totalItemInCart) {
     // console.log('Update badge icon', itemInCart)
@@ -224,7 +226,7 @@ function updateBadgeIcon(totalItemInCart) {
 
 // ********************************
 // Sort and update cart array
-// Should be a module ?
+// 
 // ********************************
 function sortCartArray(itemsArray) {
     
@@ -266,7 +268,7 @@ function sortCartArray(itemsArray) {
 
 // *************************************
 // Display the item in the cart template
-// Should be a module ?
+// 
 // *************************************
 
 function displayCartItems(cart) {
@@ -300,7 +302,6 @@ function displayCartItems(cart) {
                             <span class="me-2">X</span>
                             <input
                                     type="number"
-                                    id="quantity"
                                     class="form-control form-control-sm px-2 quantity-manager"
                                     min="1"
                                     max="10"
