@@ -28,6 +28,94 @@ function cartInitialization() {
 
 cartInitialization();
 
+// ********************
+// add item in cart
+// ********************
+
+async function addToCart(itemId, quantity) {
+
+
+    // Fetch the article
+    const camera = await getOneCamera(itemId)
+    
+    // Create JSobject
+    const itemToAdd = {
+        id: itemId,
+        name: camera.name,
+        imgUrl: camera.imageUrl,
+        quantity: quantity,
+        price: camera.price
+    }
+    
+    // Add item in cart.item array
+    cart.items.push(itemToAdd)
+    // console.log('Add Item : ', cart.items)
+
+    // Sort and create an unique array items with quantities
+    cart.items = sortCartArray(cart.items);
+
+    // Print the item(s) number in the badge icon
+    updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
+    
+    // Update cart.subtotal
+    cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
+
+    // Print item(s) in the cart template
+    displayCartItems(cart);
+
+    // Save cart item in local Storage as object
+    localStorage.setItem("items", JSON.stringify(cart.items))
+    localStorage.setItem("cartIsEmpty", false);
+    cart.isEmpty = false;
+    
+}
+/**
+ * 
+ * @param {string} id the item id 
+ * @returns {event} cart.subtotal, badge & local Storage are updated
+ */
+
+const changeQuantity = (id) => {
+    
+    return (event) => {
+        cart.items.find(item => item.id === id).quantity = event.target.value;
+        
+        cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
+
+        updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
+        
+        displayCartItems(cart);
+
+        localStorage.setItem("items", JSON.stringify(cart.items));
+    };
+}
+
+/**
+ * Renvooie msgd kjbg ljh lgl
+ * 
+ * @param {string} id L'id du machin
+ * @returns {function} La fonction de l'event machin
+ */
+ const removeItems = (id) => {
+    return () => {
+        
+        const indexOfItemToBeDeleted = cart.items.indexOf(cart.items.find(item => item.id === id));
+
+        cart.items.splice(indexOfItemToBeDeleted, 1);
+
+        cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
+
+        updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
+
+        displayCartItems(cart);
+
+        localStorage.setItem("items", JSON.stringify(cart.items));
+        console.log('RemoveItems', cart.items.lenght);
+
+    };
+}
+
+
 // *****************************
 // Call the localStorage Manager
 // *****************************
@@ -81,93 +169,6 @@ cartInitialization();
 }
 
 localStorageManager();
-
-
-// ********************
-// add item in cart
-// ********************
-
-async function addToCart(itemId, quantity) {
-
-    // Fetch the article
-    const camera = await getOneCamera(itemId)
-    
-    // Create JSobject
-    const itemToAdd = {
-        id: itemId,
-        name: camera.name,
-        imgUrl: camera.imageUrl,
-        quantity: quantity,
-        price: camera.price
-    }
-    
-    // Add item in cart.item array
-    cart.items.push(itemToAdd)
-    // console.log('Add Item : ', cart.items)
-
-    // Sort and create an unique array items with quantities
-    cart.items = sortCartArray(cart.items);
-
-    // Print the item(s) number in the badge icon
-    updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
-    
-    // Update cart.subtotal
-    cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
-
-    // Print item(s) in the cart template
-    displayCartItems(cart);
-
-    // Save cart item in local Storage as object
-    localStorage.setItem("items", JSON.stringify(cart.items))
-    localStorage.setItem("cartIsEmpty", false);
-    cart.isEmpty = false;
-    
-}
-/**
- * 
- * @param {string} id the item id 
- * @returns {event} cart.subtotal, badge & local Storage are updated
- */
-
-const changeQuantity = (id) => {
-    console.log('cart ? ChangeQantity : ', cart);
-    return (event) => {
-        cart.items.find(item => item.id === id).quantity = event.target.value;
-        
-        cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
-
-        updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
-        
-        displayCartItems(cart);
-
-        localStorage.setItem("items", JSON.stringify(cart.items));
-    };
-}
-
-/**
- * 
- * @param {string} id 
- * @returns 
- */
-const removeItems = (id) => {
-    return () => {
-        
-        const indexOfItemToBeDeleted = cart.items.indexOf(cart.items.find(item => item.id === id));
-
-        cart.items.splice(indexOfItemToBeDeleted, 1);
-
-        cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
-
-        updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
-
-        displayCartItems(cart);
-
-        localStorage.setItem("items", JSON.stringify(cart.items));
-        console.log('RemoveItems', cart.items.lenght);
-
-    };
-}
-
 
 
 // *********************************************
@@ -239,14 +240,14 @@ function sortCartArray(itemsArray) {
     // The last element of each item's id inside the array store the total quantity 
     // The result is the same array with the total quantity stored in the last element
     const properties = Object.keys(itemsArray);
-    const totalItemInArray = Object.keys(itemsArray).length
+    const totalItemInArray = Object.keys(itemsArray).length;
 
     for (const propertie of properties) {
         let item = itemsArray[propertie];
-        let item1 = itemsArray[parseInt(propertie, 10) + 1];
+        let item1 = itemsArray[parseInt(propertie) + 1];
         let tempQuantity = parseInt(itemsArray[propertie].quantity);
         
-        if (parseInt(propertie, 10) + 1 < totalItemInArray && item.id === item1.id)  {
+        if (parseInt(propertie) + 1 < totalItemInArray && item.id === item1.id)  {
             tempQuantity += item1.quantity;
             item1.quantity = tempQuantity;
         } else {
