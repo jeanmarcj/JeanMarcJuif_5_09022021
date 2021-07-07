@@ -639,6 +639,10 @@ footer .widget ol > li {
   max-width: 3.5rem;
 }
 
+i.bi-x-circle {
+  cursor: pointer;
+}
+
 .card-body .progress {
   height: 4px;
 }
