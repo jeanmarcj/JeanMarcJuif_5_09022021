@@ -94,7 +94,7 @@
     <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
       <!-- Offcanvas header -->
       <div class="offcanvas-header navbar-shadow px-4 mb-2">
-        <h5 class="mt-1 mb-0" id="cart-state">Votre Panier Orinoco est vide.</h5>
+        <h5 class="mt-1 mb-0" id="cart-state2">Votre Panier Orinoco est vide.</h5>
         <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <!-- offcanvas body -->
@@ -103,7 +103,7 @@
           <div class="simplebar-content">
 
             <!-- item -->
-            <div id="cart-item-wrapper">
+            <div id="cart-item-wrapper2">
             </div>
             <!-- item end -->
 
@@ -118,7 +118,7 @@
           <span>Total :</span>
           <span class="h6 mb-0 text-dark totalWithoutTaxes">0,00 €</span>
         </div>
-        <a href="./templates/checkout.html" class="btn btn-primary btn-sm d-block w-100">
+        <a href="./checkout.html" class="btn btn-primary btn-sm d-block w-100">
           <i class="bi bi-credit-card fs-base me-2"></i>
           Passer la commande
         </a>
@@ -260,16 +260,20 @@
           <!-- Sidebar -->
           <div class="col-lg-4 sidebar ori-bg-light pt-5 ps-lg-4 pb-md-2">
             <div class="ps-lg-4 mb-3 pb-5 ">
-              <h2 class="h4 pb-3">Votre panier Orinoco</h2>
+              <!-- <h2 class="h4 pb-3">Votre panier Orinoco</h2> -->
+              <h2 class="h4 pb-3" id="cart-state">Votre Panier Orinoco est vide.</h2>
             
+              <!-- items injected by JavaScript -->
+              <div id="cart-item-wrapper">
+              </div>
+              
               <!-- item 1 -->
-              <div class="d-flex align-items-center mb-4">
+              <!-- <div class="d-flex align-items-center mb-4">
                 <a href="templates/shop-single.html" class="d-block flex-shrink-0">
                   <img src="../img/vcam_1.jpg" alt="Article" class="rounded" width="60">
                 </a>
                 <div class="w-100 ps-2 ms-1">
                   <div class="d-flex align-items-center justify-content-between">
-                    <!-- Name & Quantity -->
                     <div class="me-3">
                       <h4 class="nav-heading fs-md mb-1">
                         <a href="templates/shop-single.html" class="fw-medium">Zurss 50S</a>
@@ -280,7 +284,6 @@
                         <input type="number" class="form-control form-control-sm px-2 input-number-sm" min="1" value="1">
                       </div>
                     </div>
-                    <!-- cancel btn -->
                     <div class="ps-3 border-start">
                       <a  href="#"
                           class="d-block text-danger text-decoration-none fs-xl"
@@ -294,31 +297,32 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- item 1 end -->
+
               <hr class="mt-0 mb-4">
 
               <!-- Sub Total -->
               <div class="d-flex justify-content-between mb-3">
                 <span class="h6 mb-0"><strong>Sous Total :</strong></span>
-                <span class="text-nav totalWithoutTaxes">0€</span>
+                <span class="text-nav totalWithoutTaxes" id="checkout-subtotal">0,00€</span>
               </div>
               <!-- TVA -->
               <div class="d-flex justify-content-between mb-3">
                 <span class="h6 mb-0"><strong>TVA 20% :</strong></span>
-                <span class="text-nav">9.980€</span>
+                <span class="text-nav" id="checkout-taxes">0,00€</span>
               </div>
               <!-- Shipping -->
               <div class="d-flex justify-content-between mb-3">
                 <span class="h6 mb-0"><strong>Livraison :</strong></span>
-                <span class="text-nav">25€</span>
+                <span class="text-nav" id="shipping">0,00€</span>
               </div>
               <!-- Total -->
               <div class="d-flex justify-content-between mb-grid-gutter ">
                 <span class="h6 mb-0"><strong>Total TTC :</strong></span>
-                <span class="h6 mb-0"><strong>59.905€</strong></span>
+                <span class="h6 mb-0"><strong id="totalToBePaid">0,00€</strong></span>
               </div>
-              <button class="btn btn-primary d-block w-100" type="submit">Valider la commande</button>
+              <button class="btn btn-primary d-block w-100" type="submit" id="orderBtn">Valider la commande</button>
             </div>
           </div>
         </div>

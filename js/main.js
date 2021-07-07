@@ -34,12 +34,12 @@ async function main() {
 
     //Cart management
 
-    if (localStorage.getItem("cartIsEmpty") === "true") {
+    if (localStorage.getItem("cartIsEmpty") === true) {
         console.log("Votre panier est vide");
        
     } else {
         localStorage.setItem("cartIsEmpty", false);
-        // console.log("Vous avez des articles dans votre panier !");
+        console.log("Vous avez des articles dans votre panier !");
         console.log("Etat de l'objet panier : ", cart);
     }
 }

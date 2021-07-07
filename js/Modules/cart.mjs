@@ -7,9 +7,12 @@ let cart = {
     subtotal: 0,
     taxPercentage: 20,
     shipping: 15,
+    taxesToBePaid: 0,
     totalToBePaid: 0,
     isEmpty: true,
 }
+
+let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
 
 // Cart Initialization
 function cartInitialization() {
@@ -23,6 +26,11 @@ function cartInitialization() {
         displayCartItems(cart);
         localStorage.setItem("cartIsEmpty", true);
         cart.isEmpty = true;
+        //Disable all buttons
+        let buttonState = "off";
+        for (let buttonId of buttonsIdList) {
+            switchOrderButton(buttonState, buttonId);
+        }
     }
 }
 
@@ -59,7 +67,9 @@ async function addToCart(itemId, quantity) {
     
     // Update cart.subtotal
     cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
-
+    cart.taxesToBePaid = (cart.subtotal * cart.taxPercentage)/100;
+    cart.totalToBePaid = cart.subtotal + cart.taxesToBePaid + cart.shipping;
+    console.log(cart);
     // Print item(s) in the cart template
     displayCartItems(cart);
 
@@ -67,6 +77,12 @@ async function addToCart(itemId, quantity) {
     localStorage.setItem("items", JSON.stringify(cart.items))
     localStorage.setItem("cartIsEmpty", false);
     cart.isEmpty = false;
+
+    // Active buttons
+    let buttonState = "on";
+    for (let buttonId of buttonsIdList) {
+        switchOrderButton(buttonState, buttonId);
+    }
     
 }
 /**
@@ -81,6 +97,7 @@ const changeQuantity = (id) => {
         cart.items.find(item => item.id === id).quantity = event.target.value;
         
         cart.subtotal = cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue);
+        // console.log('Subtotal inside changeQuantity :', cart.subtotal);
 
         updateBadgeIcon(cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)));
         
@@ -106,13 +123,29 @@ const changeQuantity = (id) => {
         cart.items.splice(indexOfItemToBeDeleted, 1);
 
         cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
-
+        
         updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
 
         displayCartItems(cart);
 
+        // cart.items.length > 0 ? alert('Des articles dans votre panier') : alert('Panier vide !');
+
+        if (cart.items.length > 0) {
+            cart.isEmpty = false;
+        } else {
+            // Disable all buttons
+            let buttonState = "off";
+            for (let buttonId of buttonsIdList) {
+                switchOrderButton(buttonState, buttonId);
+            }
+            cart.isEmpty = true;
+            cart.taxesToBePaid = 0;
+            cart.totalToBePaid = 0;
+            console.log('Inside removeItems : ', cart);
+        }
+        
         localStorage.setItem("items", JSON.stringify(cart.items));
-        console.log('RemoveItems', cart.items.lenght);
+        // console.log('RemoveItems', cart.items.lenght);
 
     };
 }
@@ -172,11 +205,15 @@ const changeQuantity = (id) => {
         updateBadgeIcon(0);
         localStorage.setItem("cartIsEmpty", true);
         cart.isEmpty = true;
+        let buttonState = "off";
+        for (let buttonId of buttonsIdList) {
+            // console.log(buttonId)
+            switchOrderButton(buttonState, buttonId);
+        }
     }
 }
 
 localStorageManager();
-
 
 // *********************************************
 // Read localStorage & update cart.items
@@ -222,7 +259,6 @@ function computeTotalAmount(price, quantity) {
 
 // ********************************
 // Update the badge icon in nav bar
-// 
 // ********************************
 function updateBadgeIcon(totalItemInCart) {
     // console.log('Update badge icon', itemInCart)
@@ -270,15 +306,54 @@ function sortCartArray(itemsArray) {
 
 }
 
+/**
+ * Ajoute ou retire l'attribut 'disabled' à un boutton.
+ * 
+ * @param { string } buttonState The button state on or off
+ * @param { string }buttonId The dom button id inside HTML
+ */
+
+function switchOrderButton(buttonState, buttonId) {
+    
+    const buttonElt = document.getElementById(buttonId);
+    let classes = buttonElt.classList;
+
+    if (buttonState === "on") {
+       
+        classes.remove("disabled");
+        
+    } else {
+        
+        classes.add("disabled");
+        
+    }
+}
 
 // *************************************
 // Display the item in the cart template
-// 
 // *************************************
 
 function displayCartItems(cart) {
-
     document.getElementById("cart-state").textContent = cart.items.length !== 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) + " article(s) dans votre panier" : "Votre panier Orinoco est vide.";
+
+    const taxesToBePaidElt = document.getElementById("checkout-taxes");
+
+    if (taxesToBePaidElt != undefined && taxesToBePaidElt != null) {
+        
+        let checkoutTaxes = (cart.subtotal * cart.taxPercentage)/100;
+        
+        cart.taxesToBePaid = checkoutTaxes;
+        let checkoutTaxesFormated = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.taxesToBePaid);
+        document.getElementById("checkout-taxes").textContent = checkoutTaxesFormated;
+
+        const formatedShipping = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.shipping);
+        document.getElementById("shipping").textContent = formatedShipping;
+
+        const totalToBePaid = cart.subtotal + cart.taxesToBePaid + cart.shipping;
+        const formatedTotalToBePaid = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(totalToBePaid);
+        document.getElementById("totalToBePaid").textContent = formatedTotalToBePaid;
+
+    }
 
     const htmlWrapper = document.getElementById("cart-item-wrapper");
     htmlWrapper.innerHTML = '';
@@ -364,4 +439,4 @@ function displayCartItems(cart) {
     }
 }
 
-export { cart, addToCart }
+export { cart, addToCart, switchOrderButton, buttonsIdList }

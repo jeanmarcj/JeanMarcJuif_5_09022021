@@ -1,6 +1,6 @@
 import { getCamera } from "./Modules/fetchCamera.mjs"
 import { displaySingleCamera } from "./Modules/displaySingleCamera.mjs"
-import { cart, addToCart } from './Modules/cart.mjs';
+import { cart, addToCart, switchOrderButton, buttonsIdList } from './Modules/cart.mjs';
 
 main()
 
@@ -16,6 +16,14 @@ async function main() {
         
         for (const targetAddToCartElem of targetAddToCart) {
             targetAddToCartElem.addEventListener("click", addToCartAction);
+        }
+        
+        if (cart.items.length === 0) {
+
+            let buttonState = "off";
+            for (let buttonId of buttonsIdList) {
+                switchOrderButton(buttonState, buttonId);
+            }
         }
 
     } catch(error) {
