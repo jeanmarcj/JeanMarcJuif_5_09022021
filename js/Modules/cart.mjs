@@ -10,6 +10,9 @@ let cart = {
     taxesToBePaid: 0,
     totalToBePaid: 0,
     isEmpty: true,
+    customer: [],
+    orderId: ''
+
 }
 
 let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
@@ -26,6 +29,8 @@ function cartInitialization() {
         displayCartItems(cart);
         localStorage.setItem("cartIsEmpty", true);
         cart.isEmpty = true;
+        cart.customer = [];
+        cart.orderId = "";
         //Disable all buttons
         let buttonState = "off";
         for (let buttonId of buttonsIdList) {
@@ -174,21 +179,21 @@ const changeQuantity = (id) => {
         cart.isEmpty = false;
         
         // 2° Sort and create an unique array items with quantities
-        let uniqueItemsArray = sortCartArray(cart.items);
+        // let uniqueItemsArray = sortCartArray(cart.items);
         
-        // 3° Sort and create an unique array items with quantities
+        // 2° Sort and create an unique array items with quantities
         cart.items = sortCartArray(cart.items);
 
-        // 4° Update cart.subtotal
+        // 3° Update cart.subtotal
         cart.subtotal = cart.items.length > 0 ? cart.items.map(item => item.quantity * item.price).reduce((accumulator, currentValue) => accumulator + currentValue) : 0;
 
-        // 5° Print the item(s) number in the badge icon
+        // 4° Print the item(s) number in the badge icon
         updateBadgeIcon(cart.items.length > 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) : 0);
 
-        // 6° Print item(s) in the cart template
+        // 5° Print item(s) in the cart template
         displayCartItems(cart);
 
-        // 7° Print total amount
+        // 6° Print total amount
         // const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
         // document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
         const formatedSubTotal = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
@@ -197,7 +202,7 @@ const changeQuantity = (id) => {
             eltTotal.textContent = formatedSubTotal;
         }
 
-        // 8° Save cart item in local Storage as object
+        // 7° Save cart item in local Storage as object
         localStorage.setItem("items", JSON.stringify(cart.items));
 
     } else {
@@ -211,6 +216,14 @@ const changeQuantity = (id) => {
             switchOrderButton(buttonState, buttonId);
         }
     }
+
+    const orderId = localStorage.getItem("orderId");
+
+    if (orderId != null) {
+        cart.orderId = orderId;
+        cart.customer = localStorage.getItem("customer");
+    }
+
 }
 
 localStorageManager();
