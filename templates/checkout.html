@@ -49,12 +49,12 @@
               <p class="fs-ms text-muted">
                 Connectez-vous à votre compte avec votre email et votre mot de passe reçus lors de votre enregistrement.
               </p>
-              <form class="needs-validation" novalidate>
+              <form class="" novalidate>
                 <div class="mb-3">
                   <div class="input-group">
                     <!-- <i class="bi bi-envelope ms-3"></i> -->
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                    <input class="form-control rounded" type="Email" placeholder="email" required />
+                    <input class="form-control rounded" type="email" placeholder="email" required />
                   </div>
                 </div>
                 <div class="mb-3">
@@ -62,7 +62,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-lock"></i>
                     </span>
-                    <input type="password" class="form-control" placeholder="Mot de passe" required />
+                    <input type="password" class="form-control" placeholder="Mot de passe" autocomplete="current-password" required />
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -175,7 +175,7 @@
     <!-- Coupon code modal -->
 
     <!-- cart validation -->
-    <form class="sidebar-enabled sidebar-end needs-validation" novalidate>
+    <form class="sidebar-enabled sidebar-end needs-validation" id="orderForm" name="orderForm" action="./order-tracking.html" novalidate>
       <div class="container">
         <div class="row">
           <!-- content -->
@@ -185,19 +185,23 @@
             <div class="row mb-4">
               <!-- Last Name (nom) -->
               <div class="col-sm-6 mb-3 pb-1">
-                <label for="lastname" class="form-label">
+                <label for="lastName" class="form-label">
                   Nom
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="lastname" name="lastname" require autofocus />
+                <input type="text" class="form-control" id="lastName" name="lastName" required autofocus />
+                <div class="invalid-feedback">Entrer un nom valide.</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!--First name (prénom) -->
               <div class="col-sm-6 mb-3 pb-1">
-                <label for="firstname" class="form-label">
+                <label for="firstName" class="form-label">
                   Prénom
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="firstname" name="firstname" require />
+                <input type="text" class="form-control" id="firstName" name="firstName" required />
+                <div class="invalid-feedback">Entrer un prénom valide.</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!-- Adress 1 -->
               <div class="col-12 mb-3 pb-1">
@@ -205,7 +209,9 @@
                   Adresse
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="N° et nom de la rue" require />
+                <input type="text" class="form-control" id="address" name="address" placeholder="N° et nom de la rue" required/>
+                <div class="invalid-feedback">Enter une adresse valide</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!-- Adress 2 -->
               <div class="col-12 mb-3 pb-1">
@@ -215,9 +221,10 @@
               <div class="col-12 mb-3 pb-1">
                 <label for="postcode" class="form-label">
                   Code Postal
-                  <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="postcode" name="postcode" require />
+                <input type="text" class="form-control" id="postcode" name="postcode" />
+                <div class="invalid-feedback">Entrer un code postal valide.</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!-- Town City -->
               <div class="col-12 mb-3 pb-1">
@@ -225,15 +232,17 @@
                   Ville
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="city" name="city" require />
+                <input type="text" class="form-control" id="city" name="city" required />
+                <div class="invalid-feedback">Entrer un nom de ville valide.</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!-- Phone -->
               <div class="col-sm-6 mb-3 pb-1">
                 <label for="phone" class="form-label">
                   Téléphone
-                  <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="phone" name="phone" require />
+                <input type="text" class="form-control" id="phone" name="phone" />
+                <div class="valid-feedback">Looks good!</div>
               </div>
               <!-- Email -->
               <div class="col-sm-6 mb-3 pb-1">
@@ -241,7 +250,9 @@
                   Addresse Mail
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="mail" class="form-control" id="email" name="email" require />
+                <input type="mail" class="form-control" id="email" name="email" required />
+                <div class="invalid-feedback">Entrer un email valide.</div>
+                <div class="valid-feedback">Looks good!</div>
               </div>
             </div>
             <!-- Additionnal informations -->
@@ -266,39 +277,6 @@
               <!-- items injected by JavaScript -->
               <div id="cart-item-wrapper">
               </div>
-              
-              <!-- item 1 -->
-              <!-- <div class="d-flex align-items-center mb-4">
-                <a href="templates/shop-single.html" class="d-block flex-shrink-0">
-                  <img src="../img/vcam_1.jpg" alt="Article" class="rounded" width="60">
-                </a>
-                <div class="w-100 ps-2 ms-1">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div class="me-3">
-                      <h4 class="nav-heading fs-md mb-1">
-                        <a href="templates/shop-single.html" class="fw-medium">Zurss 50S</a>
-                      </h4>
-                      <div class="d-flex align-items-center fs-sm">
-                        <span class="me-2">49900 €</span>
-                        <span class="me-2">X</span>
-                        <input type="number" class="form-control form-control-sm px-2 input-number-sm" min="1" value="1">
-                      </div>
-                    </div>
-                    <div class="ps-3 border-start">
-                      <a  href="#"
-                          class="d-block text-danger text-decoration-none fs-xl"
-                          data-bs-toggle="tooltip"
-                          title="Retirer cet article"
-                          data-bs-original-title="Retirer cet article"
-                          aria-label="Retirer"
-                      >
-                        <i class="bi bi-x-circle"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-- item 1 end -->
 
               <hr class="mt-0 mb-4">
 
