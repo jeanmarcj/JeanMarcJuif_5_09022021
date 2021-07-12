@@ -1,7 +1,5 @@
-
-
 function main() {
-    console.log('Je suis dans order-tracking.js - main');
+    // console.log('Je suis dans order-tracking.js - main');
 
     const orderId = localStorage.getItem("orderId");
 
