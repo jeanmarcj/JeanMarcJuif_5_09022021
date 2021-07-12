@@ -1,4 +1,4 @@
-import { cart, addToCart } from './Modules/cart.mjs';
+import { cart } from './Modules/cart.mjs';
 
 console.log('Hello je suis dans checkout.js !');
 
@@ -19,7 +19,6 @@ function main() {
 
   boostrapValidation();
 
-  // checkForm();
 }
 
 
@@ -31,7 +30,16 @@ function boostrapValidation() {
 
     let status = checkForm();
     if(status) {
-      alert("Je pense que je peux envoyer le formulaire !");
+      //Fetch all items id
+      for (const itemId of cart.items) {
+        // console.log(itemId.id);
+        purchaseOrder.products.push(itemId.id);
+      }
+      console.log(purchaseOrder);
+
+      alert("J'envoie le formulaire !");
+      submitOrder(purchaseOrder);
+
     }
 
     if (!form.checkValidity()) {
@@ -62,7 +70,6 @@ function boostrapValidation() {
 
 function checkForm() {
   
-  // LastName regex test
   let lastName = document.orderForm.lastName.value.trim().toLocaleLowerCase();
   let firstName = document.orderForm.firstName.value.trim().toLocaleLowerCase();
   let address = document.orderForm.address.value.trim().toLocaleLowerCase();
@@ -94,23 +101,23 @@ function checkForm() {
     purchaseOrder.contact.address = address;
     purchaseOrder.contact.city = city;
     purchaseOrder.contact.email = email; 
-    console.log(purchaseOrder.contact);
+    // console.log(purchaseOrder.contact);
     return true;
   }
-
-  // Address regex test
-
   
 }
-
+/**
+ * Test a regex rule for an input
+ * apply the setCustomValidity function to the element id
+ * return a boolean
+ * 
+ * @param {string} inputName The value of the input
+ * @param {string} elt The id value of the input 
+ * @param {string} regex The regex to apply to the input 
+ * @returns {boolean}
+ */
 function testRegex(inputName, elt, regex) {
   
-  // console.log("inputName : ", inputName);
-  // console.log("elt : ", elt);
-  // console.log('regex :', regex);
-  // console.log(purchaseOrder.contact);
-  // alert("testRegex2");
-
   let element = document.getElementById(elt);
   
   if(inputName.match(regex)) {
@@ -125,23 +132,27 @@ function testRegex(inputName, elt, regex) {
   }
 }
 
+/**
+ * 
+ * @param {object} purchaseOrder the JS Object to Post
+ */
 
+function submitOrder(purchaseOrder) {
+  console.log(purchaseOrder);
+  alert('Hello submitOrder');
 
-function submitOrder() {
-  console.log('Hello submitOrder');
+  // let toBeSubmited = {
+  //   contact: {
+  //     firstName: 'Jean-Marc',
+  //     lastName: 'Juif',
+  //     address: 'Mon adresse',
+  //     city: 'Ma ville',
+  //     email: 'Mon email'
+  //   },
+  //   products: ["5be1ed3f1c9d44000030b061"]
+  // }
 
-  let toBeSubmited = {
-    contact: {
-      firstName: 'Jean-Marc',
-      lastName: 'Juif',
-      address: 'Mon adresse',
-      city: 'Ma ville',
-      email: 'Mon email'
-    },
-    products: ["5be1ed3f1c9d44000030b061"]
-  }
-
-  console.log('PurchaseOrder : ', JSON.stringify(toBeSubmited));
+  console.log('PurchaseOrder : ', JSON.stringify(purchaseOrder));
 
   fetch('http://localhost:3000/api/cameras/order', {
     method: "POST",
@@ -149,22 +160,25 @@ function submitOrder() {
       'Accept': 'application/json',
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(toBeSubmited),
+    body: JSON.stringify(purchaseOrder),
   })
   .then(function(response) {
     if(response.ok) {
       return response.json();
     } else {
-      console.log("Erreur dans l'envoi des données !");
+      console.log("Erreur dans l'envoi des données du formulaire !");
     }
   })
   .then(function(datas){
+    console.log(datas);
     alert('Je suis dans datas !');
-    localStorage.setItem("customer", JSON.stringify(datas.contact));
+    localStorage.setItem("orderCustomer", JSON.stringify(datas.contact));
     localStorage.setItem("orderId", JSON.stringify(datas.orderId));
+    localStorage.setItem("orderProducts", JSON.stringify(datas.products));
     cart.customer = JSON.stringify(datas.contact);
     cart.orderId = JSON.stringify(datas.orderId);
-    // window.location.assign("./order-tracking.html");
+
+    window.location.assign("./order-tracking.html?" + datas.orderId);
   })
   .catch(function(error) {
     console.log("Le serveur de réception n'est pas disponible ! " + error.message);
