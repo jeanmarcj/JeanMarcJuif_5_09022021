@@ -94,13 +94,13 @@
     <div aria-hidden="true" class="offcanvas offcanvas-end" data-bs-scroll="true" id="shoppingCart" style="visibility: hidden">
       <!-- Offcanvas header -->
       <div class="offcanvas-header navbar-shadow px-4 mb-2">
-        <h5 class="mt-1 mb-0" id="cart-state2">Votre Panier Orinoco est vide.</h5>
+        <h5 class="mt-1 mb-0" id="cart-state2">Votre panier est en cours de commande !</h5>
         <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <!-- offcanvas body -->
       <div class="offcanvas-body p-4" data-simplebar="init">
         <div class="simplebar-wrapper" syle="margin: -24px">
-          <div class="simplebar-content">
+          <div class="">
 
             <!-- item -->
             <div id="cart-item-wrapper2">
@@ -118,15 +118,16 @@
           <span>Total :</span>
           <span class="h6 mb-0 text-dark totalWithoutTaxes">0,00 €</span>
         </div>
-        <a href="./checkout.html" class="btn btn-primary btn-sm d-block w-100">
+        <button class="btn btn-primary btn-sm d-block w-100" disabled>
           <i class="bi bi-credit-card fs-base me-2"></i>
           Passer la commande
-        </a>
-        <button id="clearCart" class="btn btn-outline-danger btn-sm w-100 mt-1">
+        </button>
+        <button id="clearCart" class="btn btn-outline-danger btn-sm w-100 mt-1 disabled">
           <i class="bi bi-x-square fs-base me-2"></i>
           Vider
         </button>
       </div>
+      <!-- offcanvas footer end -->
     </div>
 
     <header>
@@ -302,7 +303,8 @@
                 <span class="h6 mb-0"><strong>Total TTC :</strong></span>
                 <span class="h6 mb-0"><strong id="totalToBePaid">0,00€</strong></span>
               </div>
-              <button class="btn btn-primary d-block w-100" type="submit" id="orderBtn">Valider la commande</button>
+              <button class="btn btn-primary d-block w-100 mb-3" type="submit" id="orderBtn">Valider la commande</button>
+              <a href="../index.html" class="btn btn-outline-info d-block w-100">Retour au catalogue des produits</a>
             </div>
           </div>
         </div>
