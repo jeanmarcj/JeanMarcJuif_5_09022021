@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/jeanmarcj/JeanMarcJuif_5_09022021/issues"
   },
-  "homepage": "https://github.com/jeanmarcj/JeanMarcJuif_5_09022021#readme"
+  "homepage": "https://github.com/jeanmarcj/JeanMarcJuif_5_09022021#readme",
+  "dependencies": {
+    "sass": "^1.35.2"
+  }
 }
