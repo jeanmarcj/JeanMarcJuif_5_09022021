@@ -1,6 +1,6 @@
 import { getCameras } from './Modules/fetchCameras.mjs';
 import { displayCamera } from './Modules/displayCamera.mjs';
-import { cart, addToCart } from './Modules/cart.mjs';
+import { cart, addToCart, updateBadgeIcon } from './Modules/cart.mjs';
 
 
 main();
@@ -11,7 +11,7 @@ async function main() {
     
     try {
         const cameras = await getCameras();
-        console.log('Liste des APN :', cameras);
+        // console.log('Liste des APN :', cameras);
         
         // Display all cameras
         for (let i = 0; i < cameras.length; i++) {
@@ -19,10 +19,21 @@ async function main() {
             displayCamera(camera);
         }
 
+        // Add event listener on icon add to cart
         const targetAddToCart = document.querySelectorAll(".btn-addtocart");
         
         for (const targetAddToCartElem of targetAddToCart) {
             targetAddToCartElem.addEventListener("click", addToCartAction);
+        }
+
+        // Check if an order exists
+        const checkOrderId = localStorage.getItem("orderId");
+        if (checkOrderId != null) {
+            updateBadgeIcon(0);
+            console.log("Une commande existe !");
+            console.log("localStorage remis à zéro !");
+            localStorage.clear();
+            localStorage.setItem("cartIsEmpty", true);
         }
 
     } catch(error) {
@@ -34,18 +45,18 @@ async function main() {
 
     //Cart management
 
-    if (localStorage.getItem("cartIsEmpty") === true) {
-        console.log("Votre panier est vide");
+    // if (localStorage.getItem("cartIsEmpty") === true) {
+    //     console.log("Votre panier est vide");
        
-    } else {
-        localStorage.setItem("cartIsEmpty", false);
-        console.log("Vous avez des articles dans votre panier !");
-        console.log("Etat de l'objet panier : ", cart);
-    }
+    // } else {
+    //     localStorage.setItem("cartIsEmpty", false);
+    //     console.log("Vous avez des articles dans votre panier !");
+    //     console.log("Etat de l'objet panier : ", cart);
+    // }
+    console.log("Etat de l'objet panier : ", cart);
 }
 
 function displayError(message, error, errorClass) {
-    // console.log(message, error, errorClass);
     
     errorClass = "alert-" + errorClass
     

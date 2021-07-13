@@ -1,7 +1,5 @@
 import { cart } from './Modules/cart.mjs';
 
-console.log('Hello je suis dans checkout.js !');
-
 let purchaseOrder = {
   contact: {
     firstName: "",

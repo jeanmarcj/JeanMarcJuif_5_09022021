@@ -20,6 +20,11 @@ let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
 // Cart Initialization
 function cartInitialization() {
     // localStorage.setItem("cartIsEmpty", true);
+    
+    if(localStorage.getItem("cartIsEmpty") === "true") {
+        console.log("cartInit : isEmpty = true" );
+        updateBadgeIcon(0);
+    }
 
     clearCart.onclick = () => {
         localStorage.clear();
@@ -179,9 +184,6 @@ const changeQuantity = (id) => {
         cart.isEmpty = false;
         
         // 2° Sort and create an unique array items with quantities
-        // let uniqueItemsArray = sortCartArray(cart.items);
-        
-        // 2° Sort and create an unique array items with quantities
         cart.items = sortCartArray(cart.items);
 
         // 3° Update cart.subtotal
@@ -323,7 +325,7 @@ function sortCartArray(itemsArray) {
  * Ajoute ou retire l'attribut 'disabled' à un boutton.
  * 
  * @param { string } buttonState The button state on or off
- * @param { string }buttonId The dom button id inside HTML
+ * @param { string } buttonId The html dom button id
  */
 
 function switchOrderButton(buttonState, buttonId) {
@@ -433,7 +435,6 @@ function displayCartItems(cart) {
     for (const eltTotal of totalWhithoutTaxes) {
         eltTotal.textContent = formatedSubTotal;
     }
-    // document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
 
     // Add listerners for quantity on change
     const quantityManagers = document.querySelectorAll('.quantity-manager');
@@ -452,4 +453,4 @@ function displayCartItems(cart) {
     }
 }
 
-export { cart, addToCart, switchOrderButton, buttonsIdList }
+export { cart, addToCart, switchOrderButton, buttonsIdList, updateBadgeIcon }
