@@ -34,6 +34,7 @@ async function main() {
             console.log("localStorage remis à zéro !");
             localStorage.clear();
             localStorage.setItem("cartIsEmpty", true);
+            
         }
 
     } catch(error) {
