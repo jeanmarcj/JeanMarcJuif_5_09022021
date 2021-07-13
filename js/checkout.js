@@ -49,20 +49,6 @@ function boostrapValidation() {
       
     form.classList.add('was-validated');
 
-    // if (form.checkValidity()) {
-    //   alert("checkValidity OK !")
-    
-    //   let status = checkForm();
-
-    //   if (status) {
-    //     alert("Ok pour envoyer le formulaire !")
-    //   } else {
-    //     alert("Le formulaire comporte des erreurs !");
-        
-    //     event.preventDefault();
-    //     event.stopPropagation();
-    //   }
-    // }
     
   }, false)
 
@@ -101,7 +87,7 @@ function checkForm() {
     purchaseOrder.contact.address = address;
     purchaseOrder.contact.city = city;
     purchaseOrder.contact.email = email; 
-    // console.log(purchaseOrder.contact);
+    
     return true;
   }
   
