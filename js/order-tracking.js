@@ -6,7 +6,7 @@ function main() {
     if (orderId != null) {
         let customer = JSON.parse(localStorage.getItem("orderCustomer"));
         // console.log('Cart firstName : ', customer.firstName);
-        let orderProducts = JSON.parse(localStorage.getItem("orderProducts"));
+        let orderProducts = JSON.parse(localStorage.getItem("items"));
         
         displayOrder(customer, orderId);
         displayOffcanvas(customer, orderId, orderProducts);
@@ -54,13 +54,7 @@ function displayOffcanvas(customer, orderId, orderProducts) {
         displayCamera(camera);
     }    
 
-    // print products
-    // const properties = Object.keys(orderProducts);
-    // for (const propertie of properties) {
-    //     let item = orderProducts[propertie];
-    //     console.log(item);
-    // }
-    console.log(orderProducts[0].name);
+    // console.log(orderProducts[0].name);
 }
 
 /**
@@ -79,12 +73,12 @@ function displayCamera(camera) {
     // Customer order products
     // Template
     
-    console.log(camera._id);
+    // console.log(camera._id);
     const printOrderTemplate = document.getElementById("print-order");
     const cloneTemplate = document.importNode(printOrderTemplate.content, true);
-    console.log(cloneTemplate);
+    
     //Link
-    let singleItemUrl = "http://127.0.0.1:5500/templates/shop-single.html?id=" + camera._id;
+    let singleItemUrl = "http://127.0.0.1:5500/templates/shop-single.html?id=" + camera.id;
     
     // Image single link
     // http://localhost:3000/images/vcam_1.jpg
@@ -97,7 +91,7 @@ function displayCamera(camera) {
     // console.log(camera.imageUrl);
     const imgSrc = cloneTemplate.querySelectorAll('.item-img_src');
     for (const item of imgSrc) {
-        item.setAttribute("src", camera.imageUrl);
+        item.setAttribute("src", camera.imgUrl);
     }
 
     // Product Name & single link
@@ -105,6 +99,18 @@ function displayCamera(camera) {
     for (const item of itemsName) {
         item.textContent = camera.name;
         item.setAttribute("href", singleItemUrl);
+    }
+
+    // Product price
+    const itemsPrice = cloneTemplate.querySelectorAll('.item-price');
+    for (const item of itemsPrice) {
+        item.textContent = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(camera.price);
+    }
+
+    // Product quantity
+    const itemsQuantity = cloneTemplate.querySelectorAll('.item-quantity');
+    for (const item of itemsQuantity) {
+        item.textContent = camera.quantity;
     }
 
     // Child clone injection in DOM
