@@ -5,7 +5,7 @@ import { cart, addToCart, updateBadgeIcon } from './Modules/cart.mjs';
 
 main();
 
-// Fonctionnalité principale de la page
+// Main function
 
 async function main() {
     
@@ -26,7 +26,7 @@ async function main() {
             targetAddToCartElem.addEventListener("click", addToCartAction);
         }
 
-        // Check if an order exists
+        // Update cart object if an order exists
         const checkOrderId = localStorage.getItem("orderId");
         if (checkOrderId != null) {
             updateBadgeIcon(0);
@@ -44,16 +44,6 @@ async function main() {
         displayError(message, error, errorClass);
     }
 
-    //Cart management
-
-    // if (localStorage.getItem("cartIsEmpty") === true) {
-    //     console.log("Votre panier est vide");
-       
-    // } else {
-    //     localStorage.setItem("cartIsEmpty", false);
-    //     console.log("Vous avez des articles dans votre panier !");
-    //     console.log("Etat de l'objet panier : ", cart);
-    // }
     console.log("Etat de l'objet panier : ", cart);
 }
 

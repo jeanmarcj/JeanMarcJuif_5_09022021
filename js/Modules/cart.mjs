@@ -1,6 +1,8 @@
 import { getOneCamera } from './fetchCameraById.mjs';
-// JavaScript Object for the cart management
 
+/**
+ * Javascript Object declaration
+ */
 let cart = {
     name: 'Panier',
     items: [],
@@ -18,6 +20,11 @@ let cart = {
 let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
 
 // Cart Initialization
+/**
+ * Check if there the cart is empty to update icon
+ * Await for a click on the clear cart button to reset the cart
+ * and disable all buttons
+ */
 function cartInitialization() {
     // localStorage.setItem("cartIsEmpty", true);
     
@@ -39,7 +46,7 @@ function cartInitialization() {
         //Disable all buttons
         let buttonState = "off";
         for (let buttonId of buttonsIdList) {
-            switchOrderButton(buttonState, buttonId);
+            switchButton(buttonState, buttonId);
         }
     }
 }
@@ -49,6 +56,19 @@ cartInitialization();
 // ********************
 // add item in cart
 // ********************
+
+/**
+ * Fetch  the article to add into the cart
+ * Update cart.items array
+ * Sort the array to store the quantity
+ * Update the cart number icon
+ * Compute the sum
+ * Display the item(s) with quantity
+ * Update the localStorage
+ * 
+ * @param {string} itemId The item id
+ * @param {int} quantity The quantity to order
+ */
 
 async function addToCart(itemId, quantity) {
 
@@ -96,6 +116,9 @@ async function addToCart(itemId, quantity) {
     
 }
 /**
+ * Change the item quantity on click
+ * Update the cart array and print the result
+ * Update the localStorage
  * 
  * @param {string} id the item id 
  * @returns {event} cart.subtotal, badge & local Storage are updated
@@ -122,7 +145,7 @@ const changeQuantity = (id) => {
  * L'articel est identifié par son id.
  * L'évènement est détecté au click sur l'icône dans le panier.
  * 
- * @param {string} id L'id de l'article à effacer.
+ * @param {string} id Item's id to erase.
  * @returns {function} La fonction renvoyée de l'event onclick.
  */
  const removeItems = (id) => {
@@ -159,12 +182,6 @@ const changeQuantity = (id) => {
 
     };
 }
-
-
-// *****************************
-// Call the localStorage Manager
-// *****************************
-
 
 /**
  * Read the localStorage 'items' if exist
@@ -328,7 +345,7 @@ function sortCartArray(itemsArray) {
  * @param { string } buttonId The html dom button id
  */
 
-function switchOrderButton(buttonState, buttonId) {
+function switchButton(buttonState, buttonId) {
     
     const buttonElt = document.getElementById(buttonId);
     let classes = buttonElt.classList;
@@ -381,21 +398,23 @@ function displayCartItems(cart) {
         let formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item.price);
 
         let htmlTemplate =
-        `<div class="d-flex align-items-center mb-3" id="${item.id}">
-            <a href="${singleItemUrl}" class="d-block flex-shrink-0">
-                <img src="${item.imgUrl}" alt="Photo de l'appareil photo ${item.name}" class="rounded" width="60">
-            </a>
-            <div class="w-100 ps-2 ms-1">
-                <div class="d-flex align-items-center justify-content-between">
-                    <!-- Name & Quantity -->
-                    <div class="me-3">
-                        <h4 class="nav-heading fs-md mb-1">
-                            <a href="${singleItemUrl}" class="fw-medium">${item.name}</a>
-                        </h4>
-                        <div class="d-flex align-items-center fs-sm">
-                            <span class="me-2">${formatedPrice}</span>
-                            <span class="me-2">X</span>
-                            <input
+        `
+        <div class="simplebar-content mb-3">
+            <div class="d-flex align-items-center mb-3" id="${item.id}">
+                <a href="${singleItemUrl}" class="d-block flex-shrink-0">
+                    <img src="${item.imgUrl}" alt="Photo de l'appareil photo ${item.name}" class="rounded" width="60">
+                </a>
+                <div class="w-100 ps-2 ms-1">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!-- Name & Quantity -->
+                        <div class="me-3">
+                            <h4 class="nav-heading fs-md mb-1">
+                                <a href="${singleItemUrl}" class="fw-medium">${item.name}</a>
+                            </h4>
+                            <div class="d-flex align-items-center fs-sm">
+                                <span class="me-2">${formatedPrice}</span>
+                                <span class="me-2">X</span>
+                                <input
                                     type="number"
                                     class="form-control form-control-sm px-2 quantity-manager"
                                     min="1"
@@ -404,23 +423,24 @@ function displayCartItems(cart) {
                                     data-item-id="${item.id}"
                                     index="${propertie}"
                                     data-change-quantity-id="${item.id}"
+                                >
+                            </div>
+                        </div>
+                        <!-- cancel btn -->
+                        <div class="ps-3 border-start" id="cancel-btn">
+                            <div
+                                class="d-block text-danger text-decoration-none fs-xl   cancel-button"
+                                data-bs-toggle="tooltip"
+                                title="Retirer cet article"
+                                data-bs-original-title="Retirer"
+                                aria-label="Remove"
+                                id="removeItem"
+                                data-remove-id="${item.id}"
                             >
+                                <i class="bi bi-x-circle"></i>
+                            </div>
                         </div>
                     </div>
-                    <!-- cancel btn -->
-                    <div class="ps-3 border-start" id="cancel-btn">
-                    <div
-                        class="d-block text-danger text-decoration-none fs-xl cancel-button"
-                        data-bs-toggle="tooltip"
-                        title="Retirer cet article"
-                        data-bs-original-title="Retirer"
-                        aria-label="Remove"
-                        id="removeItem"
-                        data-remove-id="${item.id}"
-                    >
-                      <i class="bi bi-x-circle"></i>
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>`;
