@@ -189,9 +189,9 @@
                   Nom
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="lastName" name="lastName" required autofocus />
-                <div class="invalid-feedback">Entrer un nom valide.</div>
-                <div class="valid-feedback">Looks good!</div>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nom de famille" required autofocus />
+                <div class="invalid-feedback">Seules les lettres sont autorisées</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!--First name (prénom) -->
               <div class="col-sm-6 mb-3 pb-1">
@@ -199,9 +199,9 @@
                   Prénom
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="firstName" name="firstName" required />
-                <div class="invalid-feedback">Entrer un prénom valide.</div>
-                <div class="valid-feedback">Looks good!</div>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Prénom" required />
+                <div class="invalid-feedback">Uniquement des lettres et "-"</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!-- Adress 1 -->
               <div class="col-12 mb-3 pb-1">
@@ -210,21 +210,23 @@
                   <sup class="text-danger ms-1">*</sup>
                 </label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="N° et nom de la rue" required/>
-                <div class="invalid-feedback">Enter une adresse valide</div>
-                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">L'adresse n'est pas valable.</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!-- Adress 2 -->
               <div class="col-12 mb-3 pb-1">
                 <input type="text" class="form-control" id="address2" name="address2" placeholder="Complément d'adresse" />
               </div>
+              <div class="invalid-feedback">Seuls les caractères alphanumériques et &, _ sont autorisés</div>
+              <div class="valid-feedback">Ok!</div>
               <!-- Post Code -->
               <div class="col-12 mb-3 pb-1">
                 <label for="postCode" class="form-label">
                   Code Postal
                 </label>
-                <input type="text" class="form-control" id="postCode" name="postCode" />
-                <div class="invalid-feedback">Entrer un code postal valide.</div>
-                <div class="valid-feedback">Looks good!</div>
+                <input type="text" class="form-control" id="postCode" name="postCode" placeholder="xxxxx" />
+                <div class="invalid-feedback">Le code postal doit comporter uniquement 5 chiffres</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!-- Town City -->
               <div class="col-12 mb-3 pb-1">
@@ -232,17 +234,18 @@
                   Ville
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="text" class="form-control" id="city" name="city" required />
-                <div class="invalid-feedback">Entrer un nom de ville valide.</div>
-                <div class="valid-feedback">Looks good!</div>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Ville" required />
+                <div class="invalid-feedback">Uniquement des caractères et "-"</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!-- Phone -->
               <div class="col-sm-6 mb-3 pb-1">
                 <label for="phone" class="form-label">
                   Téléphone
                 </label>
-                <input type="text" class="form-control" id="phone" name="phone" />
-                <div class="valid-feedback">Looks good!</div>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="+33 ou 06..." />
+                <div class="invalid-feedback">+33... ou 06.... uniquement</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
               <!-- Email -->
               <div class="col-sm-6 mb-3 pb-1">
@@ -250,9 +253,9 @@
                   Addresse Mail
                   <sup class="text-danger ms-1">*</sup>
                 </label>
-                <input type="mail" class="form-control" id="email" name="email" required />
-                <div class="invalid-feedback">Entrer un email valide.</div>
-                <div class="valid-feedback">Looks good!</div>
+                <input type="mail" class="form-control" id="email" name="email" placeholder="jean@orinoco.com" required />
+                <div class="invalid-feedback">Entrer une adresse email valide</div>
+                <div class="valid-feedback">Ok!</div>
               </div>
             </div>
             <!-- Additionnal informations -->
@@ -271,8 +274,7 @@
           <!-- Sidebar -->
           <div class="col-lg-4 sidebar ori-bg-light pt-5 ps-lg-4 pb-md-2">
             <div class="ps-lg-4 mb-3 pb-5 ">
-              <!-- <h2 class="h4 pb-3">Votre panier Orinoco</h2> -->
-              <h2 class="h4 pb-3" id="cart-state">Votre Panier Orinoco est vide.</h2>
+              <h2 class="h4 pb-3" id="cart-state">Votre Panier Orinoco est vide</h2>
             
               <!-- items injected by JavaScript -->
               <div id="cart-item-wrapper">
