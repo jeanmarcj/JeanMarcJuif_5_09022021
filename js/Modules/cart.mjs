@@ -39,7 +39,7 @@ function cartInitialization() {
         cart.subtotal = 0;
         updateBadgeIcon(0);
         displayCartItems(cart);
-        localStorage.setItem("cartIsEmpty", true);
+        localStorage.setItem("cartIsEmpty", "true");
         cart.isEmpty = true;
         cart.customer = [];
         cart.orderId = "";
@@ -53,9 +53,6 @@ function cartInitialization() {
 
 cartInitialization();
 
-// ********************
-// add item in cart
-// ********************
 
 /**
  * Fetch  the article to add into the cart
@@ -111,7 +108,7 @@ async function addToCart(itemId, quantity) {
     // Active buttons
     let buttonState = "on";
     for (let buttonId of buttonsIdList) {
-        switchOrderButton(buttonState, buttonId);
+        switchButton(buttonState, buttonId);
     }
     
 }
@@ -141,12 +138,13 @@ const changeQuantity = (id) => {
 }
 
 /**
- * Efface un article du panier en cours.
- * L'articel est identifié par son id.
- * L'évènement est détecté au click sur l'icône dans le panier.
+ * Erase an item from the cart.
+ * The item is identify by his id.
+ * An event listener is attached to the icon.
+ * The event return a function. 
  * 
  * @param {string} id Item's id to erase.
- * @returns {function} La fonction renvoyée de l'event onclick.
+ * @returns {function} The return function to manage the cart.
  */
  const removeItems = (id) => {
     return () => {
@@ -161,24 +159,23 @@ const changeQuantity = (id) => {
 
         displayCartItems(cart);
 
-        // cart.items.length > 0 ? alert('Des articles dans votre panier') : alert('Panier vide !');
-
         if (cart.items.length > 0) {
             cart.isEmpty = false;
+            localStorage.setItem("cartIsEmpty", "false");
         } else {
             // Disable all buttons
             let buttonState = "off";
             for (let buttonId of buttonsIdList) {
-                switchOrderButton(buttonState, buttonId);
+                switchButton(buttonState, buttonId);
             }
             cart.isEmpty = true;
             cart.taxesToBePaid = 0;
             cart.totalToBePaid = 0;
+            localStorage.setItem("cartIsEmpty", "true");
             console.log('Inside removeItems : ', cart);
         }
         
         localStorage.setItem("items", JSON.stringify(cart.items));
-        // console.log('RemoveItems', cart.items.lenght);
 
     };
 }
@@ -187,6 +184,7 @@ const changeQuantity = (id) => {
  * Read the localStorage 'items' if exist
  * Update cart.items array after fetch & sort
  * Output on screen the results
+ * Save the items array in localStorage
  */
  function localStorageManager() {
     
@@ -213,8 +211,6 @@ const changeQuantity = (id) => {
         displayCartItems(cart);
 
         // 6° Print total amount
-        // const formatedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
-        // document.getElementById("totalWhithoutTaxes").textContent = formatedPrice;
         const formatedSubTotal = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart.subtotal);
         const totalWhithoutTaxes = document.querySelectorAll('.totalWithoutTaxes');
         for (const eltTotal of totalWhithoutTaxes) {
@@ -227,12 +223,11 @@ const changeQuantity = (id) => {
     } else {
         console.log('LocalManager : aucun article à gérer !');
         updateBadgeIcon(0);
-        localStorage.setItem("cartIsEmpty", true);
+        localStorage.setItem("cartIsEmpty", "true");
         cart.isEmpty = true;
         let buttonState = "off";
         for (let buttonId of buttonsIdList) {
-            // console.log(buttonId)
-            switchOrderButton(buttonState, buttonId);
+            switchButton(buttonState, buttonId);
         }
     }
 
@@ -247,9 +242,12 @@ const changeQuantity = (id) => {
 
 localStorageManager();
 
-// *********************************************
-// Read localStorage & update cart.items
-// *********************************************
+
+/**
+ * Read localStorage & update cart.items array.
+ * 
+ * @param { array } localStorageItems Items stored in localStorage
+ */
 
 function fetchItemsInLocalStorage(localStorageItems) {
 
@@ -276,24 +274,15 @@ function fetchItemsInLocalStorage(localStorageItems) {
 
 }
 
-// ********************************
-// Compute the price amount to add
-// A effacer ????
-// ********************************
-function computeTotalAmount(price, quantity) {
-    let parsedPrice = parseInt(price, 10)
-    if (isNaN(parsedPrice)) {
-        return 0
-    }
-    let amountToAdd = parsedPrice * quantity
-    return amountToAdd
-}
 
-// ********************************
-// Update the badge icon in nav bar
-// ********************************
+/**
+ * Print the number in the cart badge icon
+ * 
+ * @param { integer } totalItemInCart // The number to print
+ */
+
 function updateBadgeIcon(totalItemInCart) {
-    // console.log('Update badge icon', itemInCart)
+    
     document.getElementById("badge").textContent = totalItemInCart
 }
 
@@ -301,6 +290,19 @@ function updateBadgeIcon(totalItemInCart) {
 // Sort and update cart array
 // 
 // ********************************
+
+/**
+ * Sort the array given by id,
+ * The last element of each item's id inside the array store the total quantity
+ * The result is the same array with the total quantity stored in the last element
+ * Then remove the duplicate items inside the array.
+ * Only the last entrie is stored in a new array.
+ * Return an array with unique ID with the quantities computed before.
+ * 
+ * @param { array } itemsArray The array with the current cart items
+ * @returns { array }
+ */
+
 function sortCartArray(itemsArray) {
     
     // Sort the given array by id
@@ -333,13 +335,13 @@ function sortCartArray(itemsArray) {
     // Remove the duplicate items inside the array. Only the last entrie is stored in a new array
     // Return 'uniqueArray' with unique ID and good quantities computed before
     const uniqueItemsArray = [...new Map(itemsArray.map(item => [item["name"], item])).values()]
-    // console.log('uniqueArray parsed ', Array.from(uniqueArray));
+    
     return uniqueItemsArray;
 
 }
 
 /**
- * Ajoute ou retire l'attribut 'disabled' à un boutton.
+ * Add or remove 'disabled' in a button tag.
  * 
  * @param { string } buttonState The button state on or off
  * @param { string } buttonId The html dom button id
@@ -365,7 +367,14 @@ function switchButton(buttonState, buttonId) {
 // Display the item in the cart template
 // *************************************
 
+/**
+ * Display the cart object given.
+ * 
+ * @param { object }cart The cart object 
+ */
+
 function displayCartItems(cart) {
+    
     document.getElementById("cart-state").textContent = cart.items.length !== 0 ? cart.items.map(item => item.quantity).reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue)) + " article(s) dans votre panier" : "Votre panier Orinoco est vide.";
 
     const taxesToBePaidElt = document.getElementById("checkout-taxes");
@@ -473,4 +482,4 @@ function displayCartItems(cart) {
     }
 }
 
-export { cart, addToCart, switchOrderButton, buttonsIdList, updateBadgeIcon }
+export { cart, addToCart, switchButton, buttonsIdList, updateBadgeIcon, displayCartItems }

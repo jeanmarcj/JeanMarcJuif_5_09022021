@@ -1,3 +1,8 @@
+/**
+ * Display cameras in the html template.
+ * 
+ * @param {object} camera The camera informations
+ */
 function displayCamera(camera) {
 
     const templateElement = document.getElementById('itemTemplate');
@@ -16,6 +21,7 @@ function displayCamera(camera) {
     const imgSrc = cloneElement.querySelectorAll('.item-img_src');
     for (const item of imgSrc) {
         item.setAttribute("src", camera.imageUrl);
+        item.setAttribute("title", "Voir les informations du " + camera.name);
     }
 
     // Product Name & single link
@@ -23,6 +29,7 @@ function displayCamera(camera) {
     for (const item of itemsName) {
         item.textContent = camera.name;
         item.setAttribute("href", singleItemlink);
+        item.setAttribute("title", "Voir les informations du " + camera.name);
     }
     
     // Product price
@@ -31,14 +38,11 @@ function displayCamera(camera) {
         item.textContent = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(camera.price);
     }
     
-    // data-item-index -> item id
-    // cloneElement.getElementById("addToCart").setAttribute("data-item-id", camera._id);
+    // Set "data-item-id" 
     const itemsId = cloneElement.querySelectorAll('.btn-addtocart');
     for (const item of itemsId) {
         item.setAttribute("data-item-id", camera._id);
     }
-
-
 
     // Child clone injection in DOM
     document.getElementById("shop-grid").appendChild(cloneElement)

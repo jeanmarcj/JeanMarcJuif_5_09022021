@@ -1,7 +1,12 @@
 const url = "http://localhost:3000/api/cameras/";
 
 // Fetch all cameras - function statement
-
+/**
+ * Fetch the cameras from the api url.
+ * Return the object.
+ * 
+ * @returns {object} The cameras fetched object.
+ */
 async function getCameras() {
     try {
 

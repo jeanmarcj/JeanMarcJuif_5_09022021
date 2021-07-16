@@ -1,9 +1,12 @@
 import { getCamera } from "./Modules/fetchCamera.mjs"
 import { displaySingleCamera } from "./Modules/displaySingleCamera.mjs"
-import { cart, addToCart, switchOrderButton, buttonsIdList } from './Modules/cart.mjs';
+import { cart, addToCart, switchButton, buttonsIdList } from './Modules/cart.mjs';
 
 main()
-
+/**
+ * Fetch and display one camera.
+ * Disable buttons if there is no items in the cart.
+ */
 async function main() {
     
     try {
@@ -22,7 +25,7 @@ async function main() {
 
             let buttonState = "off";
             for (let buttonId of buttonsIdList) {
-                switchOrderButton(buttonState, buttonId);
+                switchButton(buttonState, buttonId);
             }
         }
 
@@ -31,30 +34,26 @@ async function main() {
         let message = 'Désolé, une erreur est survenue : \n';
         const errorClass = 'danger';
         displayError(message, error, errorClass);
-        
     }
 }
 
-function displayError(message, error, errorClass) {
-    // console.log(message, error, errorClass);
+/**
+ * 
+ * @param { string } message the message to be diplay to the user
+ * @param { string } error error return by the api
+ * @param { string } errorClass the class to be apply
+ */
+ function displayError(message, error, errorClass) {
     
     errorClass = "alert-" + errorClass
-    
-    let elt = document.getElementById("error")
-        .classList.add(errorClass);
-    
-    let errorMessageClass = document.getElementById("error-message")
-        .classList.add("p-5");
-
-    let errorMessage = document.getElementById("error-message")
-        .textContent = message + error;
-
+    document.getElementById("error").classList.add(errorClass);
+    document.getElementById("error-message").classList.add("p-5");
+    document.getElementById("error-message").textContent = message + error;
 }
 
-// ***********************************
-// Call the function addToCart onclick
-// ***********************************
-
+/**
+ * Add the item in the cart with the quantity of the input.
+ */
 async function addToCartAction() {
     let itemId = this.getAttribute("data-item-id");
     let quantity = parseInt(document.querySelector('#quantity-input').value);

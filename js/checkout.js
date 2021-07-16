@@ -13,37 +13,42 @@ let purchaseOrder = {
 
 main();
 
+/**
+ * start boostrapValidation function
+ */
 function main() {
 
   boostrapValidation();
 
 }
 
-
+/**
+ * Add an event listener on the submit button.
+ * Disabling form submissions if there are invalid fields.
+ * Update the purchaseOrder object if the checkForm function return true and submit the form.
+ * If checkValidity function return false, preventDefault and stop propagation.
+ */
 function boostrapValidation() {
 
   let form = document.getElementById("orderForm");
+
   form.addEventListener('submit', function (event) {
-    console.log("Etat de form.checkValidity :", form.checkValidity());
+    event.preventDefault();
 
     let status = checkForm();
+
     if(status) {
       //Fetch all items id
       for (const itemId of cart.items) {
         // console.log(itemId.id);
         purchaseOrder.products.push(itemId.id);
       }
-      console.log(purchaseOrder);
+      // console.log(purchaseOrder);
 
-      alert("J'envoie le formulaire !");
+      // alert("J'envoie le formulaire !");
       submitOrder(purchaseOrder);
 
     }
-
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-    } 
       
     form.classList.add('was-validated');
 
@@ -52,6 +57,13 @@ function boostrapValidation() {
 
 }
 
+/**
+ * Validate the form elements with regex.
+ * If all the form input are validated, update the purchaseOrder object. 
+ * Return a boolean.
+ * 
+ * @returns { boolean } Return true if the form elements are validated.
+ */
 function checkForm() {
   
   let lastName = document.orderForm.lastName.value.trim().toLocaleLowerCase();
@@ -91,14 +103,14 @@ function checkForm() {
   
 }
 /**
- * Test a regex rule for an input
- * apply the setCustomValidity function to the element id
- * return a boolean
+ * Test a regex rule for an input.
+ * Apply the setCustomValidity function to the element id.
+ * Return a boolean.
  * 
- * @param {string} inputName The value of the input
- * @param {string} elt The id value of the input 
- * @param {string} regex The regex to apply to the input 
- * @returns {boolean}
+ * @param {string} inputName The value of the form input element.
+ * @param {string} elt The id value of the input (dom).
+ * @param {string} regex The regex to apply to the input.
+ * @returns {boolean} Return true if the input is validated.
  */
 function testRegex(inputName, elt, regex) {
   
@@ -110,31 +122,22 @@ function testRegex(inputName, elt, regex) {
     return true;
 
   } else {
-    element.setCustomValidity("Entrer un nom correct !");
-    alert("Vérifier ce champs");
+    element.setCustomValidity("Il y a une erreur dans le formulaire !");
+    // alert("Vérifier ce champs");
     return false;
   }
 }
 
 /**
+ * Submit the object purchaseOrder.
+ * Update localStorage with the response and redirect the user to the confirmation html page.
  * 
  * @param {object} purchaseOrder the JS Object to Post
  */
 
 function submitOrder(purchaseOrder) {
-  console.log(purchaseOrder);
-  alert('Hello submitOrder');
-
-  // let toBeSubmited = {
-  //   contact: {
-  //     firstName: 'Jean-Marc',
-  //     lastName: 'Juif',
-  //     address: 'Mon adresse',
-  //     city: 'Ma ville',
-  //     email: 'Mon email'
-  //   },
-  //   products: ["5be1ed3f1c9d44000030b061"]
-  // }
+  // console.log(purchaseOrder);
+  // alert('Hello submitOrder');
 
   console.log('PurchaseOrder : ', JSON.stringify(purchaseOrder));
 
@@ -155,7 +158,7 @@ function submitOrder(purchaseOrder) {
   })
   .then(function(datas){
     console.log(datas);
-    alert('Je suis dans datas !');
+    // alert('Je suis dans datas !');
     localStorage.setItem("orderCustomer", JSON.stringify(datas.contact));
     localStorage.setItem("orderId", JSON.stringify(datas.orderId));
     localStorage.setItem("orderProducts", JSON.stringify(datas.products));

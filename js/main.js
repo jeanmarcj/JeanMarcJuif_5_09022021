@@ -1,11 +1,15 @@
 import { getCameras } from './Modules/fetchCameras.mjs';
 import { displayCamera } from './Modules/displayCamera.mjs';
-import { cart, addToCart, updateBadgeIcon } from './Modules/cart.mjs';
+import { cart, addToCart, updateBadgeIcon, displayCartItems } from './Modules/cart.mjs';
 
 
 main();
 
 // Main function
+/**
+ * Get and display the cameras.
+ * Add an event listener to add an item in the cart.
+ */
 
 async function main() {
     
@@ -30,11 +34,11 @@ async function main() {
         const checkOrderId = localStorage.getItem("orderId");
         if (checkOrderId != null) {
             updateBadgeIcon(0);
-            console.log("Une commande existe !");
-            console.log("localStorage remis à zéro !");
+            cart.items = [];
             localStorage.clear();
-            localStorage.setItem("cartIsEmpty", true);
-            
+            localStorage.setItem("cartIsEmpty", "true");
+            //Vider le panier via le button...
+            displayCartItems(cart);
         }
 
     } catch(error) {
@@ -47,26 +51,29 @@ async function main() {
     console.log("Etat de l'objet panier : ", cart);
 }
 
+/**
+ * Display the error message
+ * 
+ * @param { string } message the message to be diplay to the user
+ * @param { string } error error return by the api
+ * @param { string } errorClass the class to be apply
+ */
 function displayError(message, error, errorClass) {
     
     errorClass = "alert-" + errorClass
     
-    let elt = document.getElementById("error")
-        .classList.add(errorClass);
-    
-    let errorMessageClass = document.getElementById("error-message")
-        .classList.add("p-5");
-
-    let errorMessage = document.getElementById("error-message")
-        .textContent = message + error;
+    document.getElementById("error").classList.add(errorClass);
+    document.getElementById("error-message").classList.add("p-5");
+    document.getElementById("error-message").textContent = message + error;
 
 }
 
-// ********************************
-// Call the function addToCart on
-// ********************************
 
+/**
+ * Read the id of an item and call the addToCart function with the quantity to add.
+ * 
+ */
 async function addToCartAction() {
     let itemId = this.getAttribute("data-item-id");
-    addToCart(itemId, 1);
+    await addToCart(itemId, 1);
 }

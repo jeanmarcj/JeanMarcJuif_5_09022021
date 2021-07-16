@@ -1,3 +1,6 @@
+/**
+ * Get the order id in localStorage and display the informations.
+ */
 function main() {
     // console.log('Je suis dans order-tracking.js - main');
 
@@ -16,6 +19,13 @@ function main() {
 
 main();
 
+/**
+ * Display the order customer informations and order number(id).
+ * Compute an estimated delivery date.
+ * 
+ * @param {object} customer the customer informations.
+ * @param {string} orderId the order number send by the api.
+ */
 function displayOrder(customer, orderId) {
 
     // Title
@@ -36,10 +46,18 @@ function displayOrder(customer, orderId) {
     cloneElement.getElementById("delivery-date").textContent = deliveryDate.toLocaleDateString("fr-FR", options);
 
     // Child clone injection in DOM
-    document.getElementById("purchase-wrapper").appendChild(cloneElement)
+    document.getElementById("purchase-wrapper").appendChild(cloneElement);
     
 }
 
+/**
+ * Call the displayCamera function.
+ * Display the items of the purchase order.
+ * 
+ * @param {object} customer the customer informations.
+ * @param {string} orderId the order number given by the api.
+ * @param {object} orderProducts the items of the purchase order.
+ */
 function displayOffcanvas(customer, orderId, orderProducts) {
     // console.log(orderProducts);
     // Order #
@@ -69,26 +87,26 @@ function addDaysToDate(days) {
     return res;
 }
 
+/**
+ * Display one <camera> informations.
+ * 
+ * @param {object} camera the camera informations to display
+ */
 function displayCamera(camera) {
-    // Customer order products
-    // Template
     
-    // console.log(camera._id);
+    // Customer order products
     const printOrderTemplate = document.getElementById("print-order");
     const cloneTemplate = document.importNode(printOrderTemplate.content, true);
     
-    //Link
     let singleItemUrl = "http://127.0.0.1:5500/templates/shop-single.html?id=" + camera.id;
     
-    // Image single link
-    // http://localhost:3000/images/vcam_1.jpg
+    // Image single link href
     const imgLink = cloneTemplate.querySelectorAll('.item-single-link');
     for (const item of imgLink) {
         item.setAttribute("href", singleItemUrl);
     }
 
     // Product img src url
-    // console.log(camera.imageUrl);
     const imgSrc = cloneTemplate.querySelectorAll('.item-img_src');
     for (const item of imgSrc) {
         item.setAttribute("src", camera.imgUrl);

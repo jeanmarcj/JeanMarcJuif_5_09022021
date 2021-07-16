@@ -1,3 +1,9 @@
+/**
+ * Display the camera informations for one camera
+ * in the html template.
+ * 
+ * @param {object} camera The camera object
+ */
 function displaySingleCamera(camera) {
     
     const templateElement = document.getElementById('single-item-template');
@@ -20,7 +26,7 @@ function displaySingleCamera(camera) {
     const price = camera.price;
     cloneElement.getElementById("item-price").textContent = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
     
-    // Product descriptions
+    // Product description
     cloneElement.getElementById("item-description").textContent = camera.description;
     
     // Add to Cart ID :
