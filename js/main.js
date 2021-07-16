@@ -33,12 +33,14 @@ async function main() {
         // Update cart object if an order exists
         const checkOrderId = localStorage.getItem("orderId");
         if (checkOrderId != null) {
-            updateBadgeIcon(0);
+            
             cart.items = [];
+            cart.subtotal = 0;
             localStorage.clear();
             localStorage.setItem("cartIsEmpty", "true");
-            //Vider le panier via le button...
+            updateBadgeIcon(0);
             displayCartItems(cart);
+
         }
 
     } catch(error) {
