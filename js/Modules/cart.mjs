@@ -173,6 +173,7 @@ const changeQuantity = (id) => {
             cart.totalToBePaid = 0;
             localStorage.setItem("cartIsEmpty", "true");
             console.log('Inside removeItems : ', cart);
+            window.location.assign("../index.html");
         }
         
         localStorage.setItem("items", JSON.stringify(cart.items));
