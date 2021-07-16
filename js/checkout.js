@@ -43,9 +43,7 @@ function boostrapValidation() {
         // console.log(itemId.id);
         purchaseOrder.products.push(itemId.id);
       }
-      // console.log(purchaseOrder);
 
-      // alert("J'envoie le formulaire !");
       submitOrder(purchaseOrder);
 
     }
@@ -136,8 +134,6 @@ function testRegex(inputName, elt, regex) {
  */
 
 function submitOrder(purchaseOrder) {
-  // console.log(purchaseOrder);
-  // alert('Hello submitOrder');
 
   console.log('PurchaseOrder : ', JSON.stringify(purchaseOrder));
 
