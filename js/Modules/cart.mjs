@@ -405,7 +405,7 @@ function displayCartItems(cart) {
         `
         <div class="simplebar-content mb-3">
             <div class="d-flex align-items-center mb-3" id="${item.id}">
-                <a href="${singleItemUrl}" class="d-block flex-shrink-0">
+                <a href="${singleItemUrl}" title="Voir les informations du ${item.name}" class="d-block flex-shrink-0">
                     <img src="${item.imgUrl}" alt="Photo de l'appareil photo ${item.name}" class="rounded" width="60">
                 </a>
                 <div class="w-100 ps-2 ms-1">
@@ -413,7 +413,7 @@ function displayCartItems(cart) {
                         <!-- Name & Quantity -->
                         <div class="me-3">
                             <h4 class="nav-heading fs-md mb-1">
-                                <a href="${singleItemUrl}" class="fw-medium">${item.name}</a>
+                                <a href="${singleItemUrl}" class="fw-medium" title="Voir les informations du ${item.name}">${item.name}</a>
                             </h4>
                             <div class="d-flex align-items-center fs-sm">
                                 <span class="me-2">${formatedPrice}</span>
