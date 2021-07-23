@@ -1,8 +1,7 @@
 /**
- * Get the order id in localStorage and display the informations.
+ * Get the order id in localStorage and display informations.
  */
 function main() {
-    // console.log('Je suis dans order-tracking.js - main');
 
     const orderId = localStorage.getItem("orderId");
 
@@ -104,6 +103,7 @@ function displayCamera(camera) {
     const imgLink = cloneTemplate.querySelectorAll('.item-single-link');
     for (const item of imgLink) {
         item.setAttribute("href", singleItemUrl);
+        item.setAttribute("title", "Informations sur le " + camera.name);
     }
 
     // Product img src url
@@ -117,6 +117,7 @@ function displayCamera(camera) {
     for (const item of itemsName) {
         item.textContent = camera.name;
         item.setAttribute("href", singleItemUrl);
+        item.setAttribute("title", "Informations sur le " + camera.name);
     }
 
     // Product price
