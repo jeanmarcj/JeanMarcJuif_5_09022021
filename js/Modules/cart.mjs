@@ -17,7 +17,7 @@ let cart = {
 
 }
 
-let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
+let buttonsIdList = ["orderBtn", "clearCart"];
 
 // Cart Initialization
 /**
@@ -26,12 +26,8 @@ let buttonsIdList = ["orderBtn", "clearCart", "orderBtn"];
  * and disable all buttons
  */
 function cartInitialization() {
-    // localStorage.setItem("cartIsEmpty", true);
-    
-    if(localStorage.getItem("cartIsEmpty") === "true") {
-        console.log("cartInit : isEmpty = true" );
-        updateBadgeIcon(0);
-    }
+        
+    updateBadgeIcon(0);
 
     clearCart.onclick = () => {
         localStorage.clear();
@@ -43,10 +39,9 @@ function cartInitialization() {
         cart.isEmpty = true;
         cart.customer = [];
         cart.orderId = "";
-        //Disable all buttons
-        let buttonState = "off";
+
         for (let buttonId of buttonsIdList) {
-            switchButton(buttonState, buttonId);
+            switchButton("off", buttonId);
         }
     }
 }
@@ -102,7 +97,7 @@ async function addToCart(itemId, quantity) {
 
     // Save cart item in local Storage as object
     localStorage.setItem("items", JSON.stringify(cart.items))
-    localStorage.setItem("cartIsEmpty", false);
+    localStorage.setItem("cartIsEmpty", "false");
     cart.isEmpty = false;
 
     // Active buttons
@@ -138,7 +133,7 @@ const changeQuantity = (id) => {
 }
 
 /**
- * Erase an item from the cart.
+ * Delete an item from the cart.
  * The item is identify by his id.
  * An event listener is attached to the icon.
  * The event return a function. 
@@ -172,8 +167,7 @@ const changeQuantity = (id) => {
             cart.taxesToBePaid = 0;
             cart.totalToBePaid = 0;
             localStorage.setItem("cartIsEmpty", "true");
-            console.log('Inside removeItems : ', cart);
-            window.location.assign("../index.html");
+            // window.location.assign("../index.html");
         }
         
         localStorage.setItem("items", JSON.stringify(cart.items));
@@ -196,7 +190,7 @@ const changeQuantity = (id) => {
         
         // 1° Fetch items and update cart.items array
         fetchItemsInLocalStorage(local);
-        localStorage.setItem("cartIsEmpty", false);
+        localStorage.setItem("cartIsEmpty", "false");
         cart.isEmpty = false;
         
         // 2° Sort and create an unique array items with quantities
@@ -222,7 +216,7 @@ const changeQuantity = (id) => {
         localStorage.setItem("items", JSON.stringify(cart.items));
 
     } else {
-        console.log('LocalManager : aucun article à gérer !');
+        // console.log('LocalManager : aucun article à gérer !');
         updateBadgeIcon(0);
         localStorage.setItem("cartIsEmpty", "true");
         cart.isEmpty = true;
@@ -453,7 +447,8 @@ function displayCartItems(cart) {
                     </div>
                 </div>
             </div>
-        </div>`;
+        </div>
+        `;
     
         htmlWrapper.innerHTML += htmlTemplate;
 
