@@ -30,6 +30,9 @@ Livrer un MVP de 4 pages :
 - Une Page panier : résumé des produits du panier, prix total et formulaire pour passer commande avec contrôle des données envoyées.
 - Une Page confirmation de commande : remerciement pour la commande, prix total de la commande, identifiant de commande envoyé par le serveur.
 
+Pour lancer le serveur :
+Dans le répertoire backend : pm2 start server.js --name orinocoback
+
 
 
 
